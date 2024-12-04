@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}History
+{% endblock %}
+
+{% block body %}
+
+	<div class="row m-1">
+		<div
+			class="col-lg-12 ">
+			<!--begin::Card-->
+			<div class="card card-custom gutter-b">
+				<div class="card-header">
+					<div class="card-title">
+						<h3 class="card-label">Certificate Approval Info</h3>
+					</div>
+					<div class="card-title">
+						{% if cert.version.application.submittedBy == app.user %}
+
+							<a href="{{ path('generate_cert_pdf', {'id': cert.id }) }}" 
+							 class="btn btn-light-success">
+								<i class="fa fa-download "></i>
+								Download Certificate</a>
+
+						{% endif %}
+
+					</div>
+				</div>
+				<div class="card-body">
+
+					{{cert.version.application}}
+					<br>
+					Valid from
+					{{cert.ValidFrom|date('d M, y')}}
+					-
+					{{cert.ValidUntil|date('d M, y')}}
+					<br>
+					{{cert.Version}}
+					<br>ReportExpectationPeriod:
+					{{cert.version.ReportExpectationPeriod}}
+					<br>Approved by:
+					{{cert.ApprovedBy}}
+					<br>
+					Approved date:
+					{{cert.ApprovedAt|date('d M, y')}}
+					<br>
+					{{cert.certificateCode}}
+					<br>
+					<img src="{{ qr_code }}" width="60" height="60" alt="Logo"/>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

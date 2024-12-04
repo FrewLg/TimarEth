@@ -1,0 +1,26 @@
+<div class="timeline timeline-1">
+	<div class="timeline-sep bg-primary-opacity-20"></div>
+
+	{% for history in application.actionAudits %}
+		<div class="timeline-item">
+			<div class="timeline-label">{{ history.eventTime|date('d-m-y h:i a')}}</div>
+			<div class="timeline-badge">
+				<i class="flaticon2-{{ history.icon}} text-{{ history.label}}"></i>
+			</div>
+			<div class="timeline-content text-muted font-weight-normal">
+				{{ history.doneBy }}
+
+				{% if  app.user==application.submittedBy %}
+
+					{% else %}
+						<a href="javascript:;" class="text-primary font-weight-bold">
+							from
+												IP:
+							{{ history.ip}}
+						</a>
+				{% endif %}
+				{{history.action}}.</div>
+		</div>
+	{% endfor %}
+
+</div>

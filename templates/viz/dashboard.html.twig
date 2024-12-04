@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-sm-6 col-lg-6">
+			<div class="card">
+				<div class="card-header">
+					Applications in the DB
+				</div>
+
+				<div class="card-body">
+					<canvas id="AppStatusVizLine"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 col-lg-6">
+			<div class="card">
+				<div class="card-header">
+					Applications
+				</div>
+
+				<div class="card-body">
+					<canvas id="AppStatusVizPolarArea"></canvas>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-6 col-lg-6">
+			<div class="card my-8">
+				<div class="card-header">
+					Reviewer Recommendation Per Assignment
+				</div>
+
+				<div class="card-body">
+					<canvas id="RevRecomVizLine"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 col-lg-6">
+			<div class="card my-8">
+				<div class="card-header">
+					Review Mode per application
+				</div>
+
+				<div class="card-body">
+
+					<canvas id="RevModeVizLine" style="height:20px;"></canvas>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-12 col-lg-12">
+			<div class="card my-8">
+				<div class="card-header">
+					Actions Audit 
+				</div>
+
+				<div class="card-body">
+
+					<canvas id="actionsVizLine" style="height:20px;"></canvas>
+				</div>
+			</div>
+		</div>
+		 
+	</div>
+
+{%  endblock  %}
+{%  block javascripts %}
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	{% include "viz/charts/appStatus.html.twig" %}
+	{% include "viz/charts/actions.html.twig" %}
+	{% include "viz/charts/AppStatusVizPolarArea.html.twig" %}
+	{% include "viz/charts/RevModeVizLine.html.twig" %}
+	{% include "viz/charts/RevRecomVizLine.html.twig" %}
+{%  endblock  %}

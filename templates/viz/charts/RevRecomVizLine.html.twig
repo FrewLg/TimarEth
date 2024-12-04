@@ -1,0 +1,25 @@
+<script>
+
+	const recommendations = document.getElementById('RevRecomVizLine');
+
+new Chart(recommendations, {
+type: 'polarArea',
+data: {
+labels: [{% for status in revrecommendations %}'{{ status.name }}',{% endfor %}],
+datasets: [
+{
+label: '# of Applications',
+data: [{% for status in revrecommendations %}{{ status.reviewAssignments|length }},{% endfor %}],
+borderWidth: 1
+}
+]
+},
+options: {
+scales: {
+y: {
+beginAtZero: true
+}
+}
+}
+});
+</script>

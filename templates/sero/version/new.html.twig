@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Version{% endblock %}
+
+{% block body %}
+    <h1>Create new Version</h1>
+
+    {{ include('sero/version/_form.html.twig') }}
+
+    <a href="{{ path(' ') }}">back to list</a>
+{% endblock %}

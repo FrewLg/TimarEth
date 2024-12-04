@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReviewerRecommendation index{% endblock %}
+
+{% block body %}
+    <h1>ReviewerRecommendation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Color</th>
+                <th>Hexcode</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reviewer_recommendation in reviewer_recommendations %}
+            <tr>
+                <td>{{ reviewer_recommendation.id }}</td>
+                <td>{{ reviewer_recommendation.name }}</td>
+                <td>{{ reviewer_recommendation.code }}</td>
+                <td>{{ reviewer_recommendation.color }}</td>
+                <td>{{ reviewer_recommendation.hexcode }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_reviewer_recommendation_show', {'id': reviewer_recommendation.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_reviewer_recommendation_edit', {'id': reviewer_recommendation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_reviewer_recommendation_new') }}">Create new</a>
+{% endblock %}

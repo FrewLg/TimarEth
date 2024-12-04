@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Meeting
+{% endblock %}
+
+{% block body %}
+	<h1 class="font-weight-bold  text-uppercase">Board Meeting</h1>
+	<div class="row my-4 m-1">
+
+		<div class="card col-12">
+			<div class="card-header">
+				<h5 class="font-weight-bold  text-uppercase">{{ meetingSchedule}}
+				</h5>
+			</div>
+			<div class="card-body">
+				{{ form_start(form ) }}
+				{{ form_label(form.number) }}
+				{{ form_widget(form.number) }}
+				{{ form_label(form.heldAt) }}
+				{{ form_widget(form.heldAt) }}
+				{{ form_label(form.note) }}
+				{{ form_widget(form.note) }}
+				{{ form_label(form.minuteTakenAt) }}
+				{{ form_widget(form.minuteTakenAt) }}
+				{{ form_label(form.attendee) }}<br>
+				{{ form_widget(form.attendee) }}<br><br>
+				{# Protocols awaiting #}
+				<br>
+				{# {{ form_widget(form.scheduledProtocols) }} #}
+
+				<div class="row my-4 m-1">
+
+
+					<button class="btn btn-light-success my-4">{{ button_label|default('Save') }}</button>
+				</div>
+			</div>
+
+			{{ form_end(form) }}
+		</div>
+	</div>
+	<div class="row my-4 m-1">
+
+		<div class="card col-12">
+			<div class="card-header">
+				<h5 class="font-weight-bold  text-uppercase">{{ meetingSchedule}}
+				</h5>
+
+				{{ meeting.heldAt ? meeting.heldAt|date(' H:i M d,Y') : '' }}</div>
+			<div class="card-body">
+
+				<div class="row">
+					<div class="col-12 py-4">
+						<h5 class="text-title font-weight-bold  text-uppercase">{% trans %}Attendee{% endtrans %}</h5>
+						<div class="table-responsive">
+
+							{% for item in meetings %}
+
+
+								<table class="table">
+									<tr>
+										<th>#
+										</th>
+										<th>Name</th>
+										<th>Affiliation
+										</th>
+										<th>Role/ Membership
+										</th>
+									</tr>
+
+									{% for  attendee in item.attendee  %}
+
+										<tr>
+											<td>
+												{{loop.index}}
+											</td>
+											<td>
+												{{attendee.user}}
+											</td>
+											<td>
+												{{attendee.user.profile.dirctorate}}
+											</td>
+											<td>
+												{{attendee.user}}
+											</td>
+										</tr>
+									{% endfor %}
+								</table>
+
+							{% endfor %}
+						</div>
+
+						<h5 class="text-title font-weight-bold  text-uppercase">{% trans %}Meeting Agenda{% endtrans %}</h5>
+
+						<div class="table-responsive">
+
+							<table class="table font-weight-bold  text-body p">
+								<tr>
+									<th>#
+									</th>
+									<th>Title</th>
+									<th>Principal Investigator
+									</th>
+									<th>Reviewer recommendation
+									</th>
+
+
+								</tr>
+
+								{% for protocol in meetingSchedule.sentProtocols  %}
+
+									<tr>
+										<td>
+											{{loop.index}}
+										</td>
+										<td>
+											{{protocol}}
+										</td>
+										<td>
+											{{protocol.submittedBy}}
+										</td>
+										<td>
+											{% for response in protocol.reviewAssignments %}
+												{% if response.recommendation %}
+													R{{loop.index}}:
+													<span class="label label-lg label-inline label-light-{{response.recommendation.color}}">
+														{{response.recommendation}}
+													</span>
+												{% endif %}
+
+											{% endfor %}
+										</td>
+									</tr>
+								{% endfor %}
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock  %}
+
+{% block javascripts %}
+
+	<script type='text/javascript'>
+		jQuery(document).ready(function () {
+$(document).on('click', '.remove-collection-widget', function (e) {
+$(this).closest('.row').fadeOut().remove();
+});
+$(document).on('click', '.add-another-collection-widget', function (e) {
+
+var list = jQuery(jQuery(this).attr('data-list-selector'));
+
+var counter = list.data('widget-counter') || list.children().length;
+var newWidget = list.attr('data-prototype');
+newWidget = newWidget.replace(/__name__/g, counter);
+counter++;
+list.data('widget-counter', counter);
+var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
+newElem.appendTo(list);
+});
+});
+	</script>
+{% endblock %}

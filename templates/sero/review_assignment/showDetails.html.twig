@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReviewAssignment{% endblock %}
+
+{% block body %}
+    <h1>ReviewAssignment</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ review_assignment.id }}</td>
+            </tr>
+            <tr>
+                <th>Closed</th>
+                <td>{{ review_assignment.closed ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AllowToView</th>
+                <td>{{ review_assignment.allowToView ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

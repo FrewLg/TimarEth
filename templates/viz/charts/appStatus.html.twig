@@ -1,0 +1,25 @@
+<script>
+const ctxa = document.getElementById('AppStatusVizLine');
+
+new Chart(ctxa, {
+type: 'line',
+data: {
+labels: [{% for status in statuses %}'{{ status.name }}',{% endfor %}],
+datasets: [
+{
+label: '# of Applications',
+data: [{% for status in statuses %}{{ status.applications|length }},{% endfor %}],
+borderWidth: 1
+}
+]
+},
+options: {
+scales: {
+y: {
+beginAtZero: true
+}
+}
+}
+});
+	 
+</script>

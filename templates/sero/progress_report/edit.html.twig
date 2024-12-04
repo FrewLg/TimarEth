@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ProgressReport{% endblock %}
+
+{% block body %}
+    <h1>Edit ProgressReport</h1>
+
+    {{ include('sero/progress_report/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_s_e_r_o_progress_report_index') }}">back to list</a>
+
+    {{ include('sero/progress_report/_delete_form.html.twig') }}
+{% endblock %}

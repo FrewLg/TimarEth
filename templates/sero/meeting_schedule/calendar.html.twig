@@ -1,0 +1,248 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{% trans %}Meeting Schedules{% endtrans %}
+{% endblock %}
+
+{% block body %}
+	<div class="card card-custom gutter-b">
+		<div class="card-header">
+			<div class="card-title">
+				<h3 class="card-label">{% trans %}Meeting Schedules{% endtrans %}</h3>
+			</div>
+			<div class="card-toolbar">
+
+				{{ include('sero/meeting_schedule/new.html.twig') }}
+
+
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="example-preview">
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home">
+							<span class="nav-icon">
+								<i class="fa fa-calendar"></i>
+							</span>
+							<span class="nav-text">{% trans %}Calendar view{% endtrans %}</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile">
+							<span class="nav-icon">
+								<i class="fa fa-table"></i>
+							</span>
+							<span class="nav-text">{% trans %}Table view{% endtrans %}</span>
+						</a>
+					</li>
+
+				</ul>
+				<div class="tab-content mt-5" id="myTabContent">
+					<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+						<div id="calendar-holder" class="col col-12 mb-4"></div>
+					</div>
+					<div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Name</th>
+										<th>Starting Date</th>
+										<th>End Date</th>
+										<th>Protocols</th>
+										<th nowrap='nowrap'>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for meeting_schedule in meeting_schedules %}
+										<tr nowrap='nowrap'>
+											<td>{{ loop.index }}</td>
+											<td>{{ meeting_schedule.name }}</td>
+											<td>{{ meeting_schedule.startingDate ? meeting_schedule.startingDate|date('Y-m-d  ') : '' }}</td>
+											<td>{{ meeting_schedule.endDate ? meeting_schedule.endDate|date('Y-m-d  ') : '' }}</td>
+
+											<td>
+												<span class="label label-light-success">
+													{{meeting_schedule.sentProtocols|length}}</span>
+
+											</td>
+											<td nowrap='nowrap'>
+
+
+												<button type="button" class="btn btn-sm btn-light-success" data-toggle="modal" data-target="#AddToMeetingModal{{ meeting_schedule.id}}">
+													{% trans  %}Sent Protocols{% endtrans  %}
+
+												</button>
+												<div class="modal fade" id="AddToMeetingModal{{ meeting_schedule.id}}" tabindex="-1" role="dialog" aria-labelledby="AddToMeetingModal{{ meeting_schedule.id}}" aria-hidden="true">
+													<div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="AddToMeetingModal{{ meeting_schedule.id}}Label">{% trans  %}Protocols sent to meeting{% endtrans  %}
+																	<br>
+																	<small class="text-muted">
+																		Meeting agenda of
+																		{{meeting_schedule.name}}
+																	</small>
+																</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<i aria-hidden="true" class="ki ki-close"></i>
+																</button>
+															</div>
+															<div class="modal-body">
+																<div class="table-responsive">
+																	<table class="table text-body h6 small  table-responsive">
+																		<thead>
+																			<tr>
+																				<th nowrap='nowrap'>#</th>
+																				<th>{% trans %}Title{% endtrans %}</th>
+																				<th nowrap="nowrap">{% trans %}Review Mode{% endtrans %}</th>
+																				<th>{% trans %}Assignment{% endtrans %}</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			{% for application in meeting_schedule.sentProtocols %}
+																				<tr>
+																					<td nowrap='nowrap'>
+
+																						{{loop.index}}
+
+																					</td>
+																					<td>
+																						<b class="text-muted">
+																							{{ application.ibcode }}
+																							<span class='label label-light-warning label-inline'>
+																								{{ application.versions|length 	}}
+																								{% trans %}V{% endtrans %}
+																							</span>
+																						</b>
+																						<p class="font-weight-lighter text-muted">
+																							<small>
+																								{{ application.createdAt ? application.createdAt|date('d M, y H:ia') : '' }}
+																							</small>
+																						</p>
+																						<a href="{{ path('application_show', {'uid': application.uid}) }}" class='text-body dark'>{{ application.title }}</a>
+																					</td>
+																					<td>
+																						{% if application.reviewMode %}
+																							<span class="label label-inline label-light-{{application.reviewMode.color}}">{{application.reviewMode.name}}</span>
+																						{% else %}
+																							<span class="label label-inline label-light-default">Waiting</span>
+																						{% endif %}
+																					</td>
+																					<td>
+																						{% if application.reviewAssignments|length>=0 %}
+																							{% set count = 0 %}
+																							{% for confirmation in application.reviewAssignments('closed') %}
+																								{% set count = count + 1 %}
+																								{% if confirmation.closed()|length==0 %}
+																									<span class='label label-light-warning'>
+																										{{count}}
+																										{% if count==0 %}
+																											{% elseif count<=1 %}
+																												<sup>st</sup>
+																											{% elseif count<=2%}
+																												<sup>nd</sup>
+																											{% elseif count<=3%}
+																												<sup>rd</sup>
+																											{% elseif count>=4%}
+																												<sup>th</sup>
+																										{% endif %}
+																									</span>
+
+																								{% elseif confirmation.closed() %}
+																									<span class='label label-light-success'>
+																										{{count}}
+																										{% if count==0 %}
+																											{% elseif count<=1 %}
+																												<sup>st</sup>
+																											{% elseif count<=2%}
+																												<sup>nd</sup>
+																											{% elseif count<=3%}
+																												<sup>rd</sup>
+																											{% elseif count>=4%}
+																												<sup>th</sup>
+																										{% endif %}
+																									</span>
+																								{% endif %}
+																							{% else %}
+
+																								<span class='label label-light-danger label-inline'>unassigned
+																								</span>
+																							{% endfor %}
+
+																						{% endif %}
+																					</td>
+
+																				</tr>
+																			{% else %}
+																				<tr>
+																					<td colspan="9">no records found</td>
+																				</tr>
+																			{% endfor %}
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+															<div class="modal-footer">
+																<button type="submit" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{% trans  %}Close{% endtrans  %}</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<a href="{{ path('meeting_schedule_edit', {'id': meeting_schedule.id}) }}" class='btn btn-light-warning btn-sm'>Edit</a>
+												<a href="{{ path('meetings', {'id': meeting_schedule.id}) }}" class='btn btn-light-warning btn-sm'>Meetings</a>
+											</td>
+										</tr>
+
+
+									{% else %}
+										<tr>
+											<td colspan="5">no records found</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Tab3</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+{% block javascripts %}
+	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js" integrity="sha256-dHUNnePy81fXq4D/wfu7cPsEIP7zl6MvLb84jtZf+UY=" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', () => {
+var calendarEl = document.getElementById('calendar-holder');
+
+var calendar = new FullCalendar.Calendar(calendarEl, {
+defaultView: 'dayGridMonth',
+editable: true,
+eventSources: [
+{
+url: "{{ path('fc_load_events') }}",
+method: "POST",
+extraParams: {
+filters: JSON.stringify({})
+},
+failure: () => { // alert("There was an error while fetching FullCalendar!");
+}
+},
+],
+headerToolbar: {
+start: 'prev,next today',
+center: 'title',
+end: 'dayGridMonth,timeGridWeek,timeGridDay'
+},
+timeZone: 'UTC'
+});
+calendar.render();
+});
+	</script>
+{% endblock %}

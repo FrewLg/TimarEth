@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Settings
+{% endblock %}
+
+{% block body %}
+
+	<h4 class="my-8 text-light-default">Settings</h4>
+
+
+
+
+
+<div class="accordion my-4 accordion-toggle-arrow" id="accordionExample1">
+ 	{% include "sero/settings/includes/study-type.html.twig" %}
+	{% include "sero/settings/includes/multi-site.html.twig" %}
+	{% include "sero/settings/includes/study-population.html.twig" %}
+	{% include "sero/settings/includes/special_res_requirements.html.twig" %}
+</div>
+
+
+
+{# {% include "sero/settings/includes/investiga_new_drug.html.twig" %} #}
+
+	{# {% include "sero/settings/includes/financial_disclosure.html.twig" %}
+		{% include "sero/settings/includes/proceedure_use.html.twig" %}
+		{% include "sero/settings/includes/requested_exc_participant.html.twig" %}
+		{% include "sero/settings/includes/ionizing_r_use.html.twig" %}
+		{% include "sero/settings/includes/participant_character.html.twig" %} #}
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'widebase.html.twig' %}
+
+{% block title %}New Version
+{% endblock %}
+
+{% block body %}
+
+	<div class="card">
+		<div class="card-header">
+ 				<h4>Submit a compliant</h4>
+
+ 		</div>
+		<div class="card-body">
+
+
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+			<button class="btn btn-sm btn-light-success">{{ button_label|default('Send compliant') }}</button>
+			{{ form_end(form) }}
+
+		</div>
+	</div>
+
+{% endblock %}

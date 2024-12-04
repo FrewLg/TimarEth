@@ -1,0 +1,107 @@
+{# <h5 class="  label label-lg label-light-success label-inline">
+	<b>Protocol ID:
+		{{ application.ibcode }}
+	</b>
+</h5> #}
+{# <h5 class="label label-lg label-light-danger label-inline">
+	<b>
+		{% trans %}Version{% endtrans %}:
+		{{version.versionNumber }}
+
+	</b>
+</h4> #}
+<div class="s  ">
+	<div class="card-header ribbon ribbon-top">
+		<div class="ribbon-target bg-danger" style="top: -2px; right: 20px;">{% trans %}Version{% endtrans %}:{{version.versionNumber }}</div>
+		<div class="card-title">
+			<h3 class="card-label text-body">{{ application.ibcode }}- V -{{version.versionNumber }}
+				<small>
+					<p class="text-muted small">
+						{{ version.createdAt ? version.createdAt|date('d M, y H:ia') : '' }}</p>
+				</small>
+			</h3>
+		</div>
+	</div>
+	<div class="card-body m-0">
+		
+		{% if version.versionNumber == 1 %}
+											<span class="nav-text">
+												<b>{% trans %}Summary{% endtrans %}:</b>
+												
+											</span>
+											{{version.application.description}}
+										{% else %}
+								<p class="title">{% trans %}Changes Made{% endtrans %}:</p>
+		<p>
+			{{ version.changesMade }}</p>			 
+										{% endif %}
+ 
+
+		<p>
+			{% if version.approved %}
+				<span class="label label-light-success label-inline">
+					{% trans %}Approved{% endtrans %}</span>
+			{% else %}
+				{# <span class="label label-light-danger label-inline">
+					{% trans %}Not decided{% endtrans %}</span> #}
+			{% endif %}
+		</p>
+		{# <span class="text-primary">{{ version.date ? version.date|date('Y-m-d H:i:s') : '' }}</span> #}
+{% trans %}Attachments{% endtrans %}:
+
+		{% if  version.attachment %}
+
+			<form class="m-0" action="{{ path('download', {'filename': version.attachment}) }}" method="post">
+				<button type="submit" name="submit" class="btn btn-light-primary btn-sm">
+					<i class="fa fa-download material-icons"></i>
+					{% trans %}Download Attachment{% endtrans %}</button>
+			</form>
+		{% else %}
+			No app file found
+		{% endif %}
+
+		{% if version.amendments|length>0 %}
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Purpose</th>
+						<th>Changes</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for amendment in version.amendments %}
+						<tr>
+							<td>{{ loop.index }}</td>
+							<td>{{ amendment.purpose }}</td>
+							<td>{{ amendment.changes }}</td>
+							<td></td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4" class="text-danger">No records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}			   
+	</div> 
+	<div class="card-footer m-0 d-flex justify-content-between">	
+ {% if is_granted('ROLE_CHAIR') %}
+					<a href="{{ path('app_approve', {'id': version.id}) }}" class="btn   btn-light-success font-weight-bolder text-uppercase"> {% trans %}Approve and certifiy{% endtrans %}</a>
+					{% endif %}
+		
+ {# {% if application.submittedBy == app.user %}
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<a type="button" class="btn btn-light-success">SAE&nbsp;report</a>
+							<a type="button" class="btn btn-light-danger">Continuation</a>
+							<a type="button" class="btn btn-light-info">Ammendment</a>
+							<a type="button" href="{{ path('clearance', {'id': version.id}) }}" class="btn btn-light-success">Certificate</a>
+
+						</div>
+					{% endif %} #}
+	</div>
+</div>
+ 
+ 

@@ -1,0 +1,9 @@
+# config/validator/validation.yaml
+App\Entity\Profile:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+              fields: ['phoneNumber']
+              ignoreNull: ["phoneNumber"]
+    properties:
+        signature:
+            # - signature: ~

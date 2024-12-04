@@ -1,0 +1,293 @@
+'Details added successflly!': '_dasdasd_Details added successflly!'
+Training: __Training
+'Approved Training': '__Approved Training'
+Details: __Details
+Name: __Name
+Organizers: __Organizers
+Modality: __Modality
+Participants: __Participants
+'Allowed vouchers': '__Allowed vouchers'
+Venue: __Venue
+Duration: __Duration
+'Not specified': '__Not specified'
+day: __day
+days: __days
+'no records found': '__no records found'
+'Sign In': '__Sign In'
+'Enter your details to login to your account:': '__Enter your details to login to your account:'
+Home: __Home
+Logout: __Logout
+Trainings: __Trainings
+Courses: __Courses
+'Training Requests': '__Training Requests'
+'Training Schedules': '__Training Schedules'
+'My request': '__My request'
+Plan: __Plan
+'Need Assesment': '__Need Assesment'
+results: __results
+Plans: __Plans
+Assesment: __Assesment
+Application: __Application
+Title: __Title
+Reviewers: __Reviewers
+'Add  Reviewer': '__Add  Reviewer'
+'Submited by': '__Submited by'
+Role: __Role
+'Sumitted At': '__Sumitted At'
+Status: __Status
+'Application Type': '__Application Type'
+'Project Type': '__Project Type'
+'Poject Start Date': '__Poject Start Date'
+'Poject End Date': '__Poject End Date'
+Location: __Location
+Members: __Members
+'Research subject': '__Research subject'
+'Covid-19 mitigation': '__Covid-19 mitigation'
+Attachments: __Attachments
+Amendment: __Amendment
+Revisions: __Revisions
+'Research team': '__Research team'
+Amendments: __Amendments
+Purpose: __Purpose
+'Requested At': '__Requested At'
+Action: __Action
+'No record': '__No record'
+'Protocol applications': '__Protocol applications'
+'All applications': '__All applications'
+'My assigned': '__My assigned'
+'My application': '__My application'
+'Board Members': '__Board Members'
+'Board members': '__Board members'
+Minutes: __Minutes
+'Meeting Schedules': '__Meeting Schedules'
+'Protocol submissions': '__Protocol submissions'
+'Email Management': '__Email Management'
+Messages: __Messages
+'User Management': '__User Management'
+Users: __Users
+Permissions: __Permissions
+Groups: __Groups
+Directorates: __Directorates
+Settings: __Settings
+'Workflow setting': '__Workflow setting'
+'Review checklist': '__Review checklist'
+'Review checklist group': '__Review checklist group'
+'Training venues': '__Training venues'
+'Email Messages': '__Email Messages'
+'Site Setting': '__Site Setting'
+'Statistics and archive': '__Statistics and archive'
+Feedbacks: __Feedbacks
+Archives: __Archives
+Reports: __Reports
+Dashboard: __Dashboard
+'Protocol Applications': '__Protocol Applications'
+'Make Revision': '__Make Revision'
+'Protocol assesment form': '__Protocol assesment form'
+'My Review Assignments': '__My Review Assignments'
+'All Active': '__All Active'
+'Review Form': '__Review Form'
+'Protocol Details': '__Protocol Details'
+'Progress Reports': '__Progress Reports'
+History: __History
+'My Protocol applications': '__My Protocol applications'
+'Calendar view': '__Calendar view'
+'Table view': '__Table view'
+About: __About
+EPHI: __EPHI
+Contact: __Contact
+'Users Feedbacks': '__Users Feedbacks'
+Compliants: __Compliants
+'Add Review Status Group': '__Add Review Status Group'
+'Review Status Group': '__Review Status Group'
+'Protocol Versions': '__Protocol Versions'
+'Review Checklist Group': '__Review Checklist Group'
+'Add Review Checklist Group': '__Add Review Checklist Group'
+'Download Attachment': '__Download Attachment'
+'Log in': '__Log in'
+'You are logged in as': '__You are logged in as'
+'Please sign in': '__Please sign in'
+'Remember me': '__Remember me'
+'Forget Password ?': '__Forget Password ?'
+"Don't have an account yet?": "__Don't have an account yet?"
+'Sign Up!': '__Sign Up!'
+'New application': '__New application'
+'Study Type': '__Study Type'
+'Review Type': '__Review Type'
+'Original version': '__Original version'
+Version: __Version
+'Instruction for Reviewer': '__Instruction for Reviewer'
+'Yes': __Yes
+'No': __No
+NA: __NA
+Comment: __Comment
+'YES': __YES
+'NO': __NO
+Protocol: __Protocol
+Reviewer: __Reviewer
+Response: __Response
+'Add Schedule': '__Add Schedule'
+'New Schedule': '__New Schedule'
+Close: __Close
+'Submit a new Ammendment request': '__Submit a new Ammendment request'
+'Ammendment request': '__Ammendment request'
+'Archived applications': '__Archived applications'
+'Sent at': '__Sent at'
+'IRB CODE': '__IRB CODE'
+Withdraw: __Withdraw
+'Assigned reviewers': '__Assigned reviewers'
+Directorate: __Directorate
+'Academic Rank': '__Academic Rank'
+'Date Assigned': '__Date Assigned'
+'Due date': '__Due date'
+Actions: __Actions
+'Review due-date': '__Review due-date'
+'Reviewed at': '__Reviewed at'
+Review: __Review
+'No records found  under this section': '__No records found  under this section'
+Decision: __Decision
+'Reviewed date': '__Reviewed date'
+'Ammendment Request': '__Ammendment Request'
+Applications: __Applications
+Assgined: __Assgined
+versions: __versions
+'Submitted at': '__Submitted at'
+actions: __actions
+'Reviewers assigned': '__Reviewers assigned'
+'Project start': '__Project start'
+'Project end': '__Project end'
+Primary: __Primary
+Secondary: __Secondary
+'Primary reviewer': '__Primary reviewer'
+'Assign reviewer': '__Assign reviewer'
+'Secondary reviewer': '__Secondary reviewer'
+Approved: __Approved
+'Not approved': '__Not approved'
+'Reviewers pool': '__Reviewers pool'
+'Assign Reviewer': '__Assign Reviewer'
+'Board memebrs': '__Board memebrs'
+'External reviewers': '__External reviewers'
+users: __users
+'Protocol users': '__Protocol users'
+'Title:': '__Title:'
+'Code:': '__Code:'
+English: __English
+Amharic: __Amharic
+'Afaan Oromoo': '__Afaan Oromoo'
+'Sidaamu Afoo': '__Sidaamu Afoo'
+'Reviewer Response': '__Reviewer Response'
+Recommendation: __Recommendation
+'No review responses has been  given for this protocol yet': '__No review responses has been  given for this protocol yet'
+'Continuation request': '__Continuation request'
+"Reviewer hasn't responded yet": "__Reviewer hasn't responded yet"
+'No reviewer sent any response on this application yet': '__No reviewer sent any response on this application yet'
+'Changes Made': '__Changes Made'
+Attendee: __Attendee
+'Meeting Agendas': '__Meeting Agendas'
+'Submit a Review Response': '__Submit a Review Response'
+'Survey Form': '__Survey Form'
+'Build a questionaire form': '__Build a questionaire form'
+'Add new questionaire section': '__Add new questionaire section'
+Save: __Save
+'Questionaire section': '__Questionaire section'
+'Answer Type': '__Answer Type'
+'Required?': '__Required?'
+'Save questionaire': '__Save questionaire'
+Form: __Form
+'Review form': '__Review form'
+Allforms: __Allforms
+'Build a review form': '__Build a review form'
+'Save form': '__Save form'
+'Add new review form section': '__Add new review form section'
+Submitted: __Submitted
+'Respond to survey': '__Respond to survey'
+'Submit survey response': '__Submit survey response'
+Revise: __Revise
+'User Group': '__User Group'
+'PARTICIPATING INVESTIGATORS': '__PARTICIPATING INVESTIGATORS'
+'Click the button when you want to add a new researcher': '__Click the button when you want to add a new researcher'
+'Add Participating Investigators': '__Add Participating Investigators'
+Submit: __Submit
+'Full Name': '__Full Name'
+Email: __Email
+Telephone: __Telephone
+'License Number': '__License Number'
+Institution: __Institution
+'Enter your email and password to login': '__Enter your email and password to login'
+'Click the button to add a new researcher': '__Click the button to add a new researcher'
+'Add PARTICIPATING INVESTIGATORS': '__Add PARTICIPATING INVESTIGATORS'
+'Build a reviewer form': '__Build a reviewer form'
+'Add new form section': '__Add new form section'
+'reviewerForm section': '__reviewerForm section'
+'Add choice': '__Add choice'
+'Save reviewerForm': '__Save reviewerForm'
+'Project PI': '__Project PI'
+'Project Start': '__Project Start'
+'Project End': '__Project End'
+'Clearance Valid until': '__Clearance Valid until'
+'Verify here': '__Verify here'
+V: __V
+'Validate IRB clearance here': '__Validate IRB clearance here'
+Check: __Check
+'Valid Status': '__Valid Status'
+'IRB Ethical Clearance': '__IRB Ethical Clearance'
+'Reference code': '__Reference code'
+'The IRB of': '__The IRB of'
+'has reviewed research project': '__has reviewed research project'
+'Not Approved': '__Not Approved'
+'Verify Ethical Clearance Certificate here': '__Verify Ethical Clearance Certificate here'
+'Search here using certificate CODE': '__Search here using certificate CODE'
+'Enter a reference number/code': '__Enter a reference number/code'
+French: __French
+Spanish: __Spanish
+Tigrigna: __Tigrigna
+Somali: __Somali
+Afar: __Afar
+'Update profilepicture': '__Update profilepicture'
+'Work Experiences': '__Work Experiences'
+Organization: __Organization
+Position: __Position
+'Start date': '__Start date'
+'End date': '__End date'
+'Personal Info': '__Personal Info'
+'Add Work Experiences': '__Add Work Experiences'
+Summary: __Summary
+'Approve and certifiy': '__Approve and certifiy'
+'Invalid Status': '__Invalid Status'
+'Project duration': '__Project duration'
+'Mode of Review': '__Mode of Review'
+'Approval Period': '__Approval Period'
+'Click the button to add participating investigators': '__Click the button to add participating investigators'
+'Submit application': '__Submit application'
+Discussions: __Discussions
+'Review Type Decision': '__Review Type Decision'
+'Approved with minor changes': '__Approved with minor changes'
+Resubmission: __Resubmission
+'Not decided': '__Not decided'
+'Withdraw application': '__Withdraw application'
+'Protocol History': '__Protocol History'
+'Review Mode': '__Review Mode'
+Assignment: __Assignment
+'App Settings': '__App Settings'
+'Progress Report': '__Progress Report'
+'Protocols added for the meeting schedule': '__Protocols added for the meeting schedule'
+'Sent Protocols': '__Sent Protocols'
+'Decline invitation': '__Decline invitation'
+'Meeting Agenda': '__Meeting Agenda'
+'Add to meeting': '__Add to meeting'
+'Add to Meeting': '__Add to Meeting'
+'Withdrawing a protocol application will be never irreversible. It will be keeped until 90 days until it is deleted.': '__Withdrawing a protocol application will be never irreversible. It will be keeped until 90 days until it is deleted.'
+'Confirm Withdraw': '__Confirm Withdraw'
+'Application History': '__Application History'
+'My applications': '__My applications'
+Membership: __Membership
+'Assigned at': '__Assigned at'
+'Invitation Response Due date': '__Invitation Response Due date'
+'Review Due date': '__Review Due date'
+'Invitation sent at': '__Invitation sent at'
+'Invitation Response due-date': '__Invitation Response due-date'
+Cancel: __Cancel
+Downloads: __Downloads
+Discussion: __Discussion
+'Review Results': '__Review Results'
+Ammendment: __Ammendment
+Continuation: __Continuation

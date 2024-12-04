@@ -1,0 +1,55 @@
+
+ 	<div class="card">
+		<div class="card-header"  >
+			<div class="card-title" data-toggle="collapse" data-target="#collapseOne4">
+				<i class="flaticon-search"></i>
+				Study Type
+			</div>
+		</div>
+		<div id="collapseOne4" class="collapse  " data-parent="#accordionExample1">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-4">
+						<div class="card">
+							<div class="card-body">
+								{{ form_start(studyType_form) }}
+								{{ form_widget(studyType_form) }}
+								<button class="btn btn-light-success">{{ button_label|default('Save')
+									}}</button>
+								{{ form_end(studyType_form) }}
+							</div>
+						</div>
+					</div>
+					<div class="col-8">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Name</th>
+									<th>Description</th>
+									<th>actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for study_type in study_types %}
+								<tr>
+									<td>{{ study_type.id }}</td>
+									<td>{{ study_type.name }}</td>
+									<td>{{ study_type.description }}</td>
+									<td>
+										<a href="{{ path('study_type_edit', {'id': study_type.id}) }}">edit</a>
+									</td>
+								</tr>
+								{% else %}
+								<tr>
+									<td colspan="4">no records found</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ 

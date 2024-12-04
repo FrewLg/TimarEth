@@ -1,0 +1,419 @@
+{# {% set condition = is_granted("ROLE_USER") %} #}
+{% if  is_granted("ROLE_USER")=='' %}
+	{% extends 'base.html.twig' %}
+	{% else %}
+	{# {% extends 'widebase.html.twig' %} #}
+{% endif %}
+{% block title %}
+	{% trans %}Respond to survey{% endtrans %}
+{% endblock %}
+
+{% block styles %}
+	<link href="{{ asset('theme/assets/css/pages/wizard/wizard-1.css' ) }}" rel="stylesheet" type="text/css"/>
+
+	<style>
+		.progress {
+			height: 25px;
+			margin-top: 10px;
+			display: none; /* Initially hidden */
+		}
+		.progress-bar {
+			transition: width 0.6s ease; /* Smooth transition - adjust duration as needed */
+		}
+
+		.flash-message {
+			padding: 10px;
+			margin-bottom: 10px;
+			border-radius: 5px;
+			position: fixed;
+			top: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 1000;
+		}
+		.flash-message.success {
+			background-color: #d4edda;
+			color: #155724;
+		}
+
+		.flash-message.error {
+			background-color: #f8d7da;
+			color: #721c24;
+		}
+	</style>
+
+{% endblock %}
+
+
+{% macro listCoPIs(researchMember) %}
+	<div class="row  ">
+
+		<div class="col-md-3">
+			<div
+				class="form-group  ">
+				{# <label>{% trans %}Full Name{% endtrans %}</label> #}
+				{{form_widget(researchMember.fullName)}}
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div
+				class="form-group  ">
+				{# <label>{% trans %}Email{% endtrans %}</label> #}
+				{{form_widget(researchMember.email)}}
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div
+				class="form-group  ">
+				{# <label>{% trans %}Telephone{% endtrans %}</label> #}
+				{{form_widget(researchMember.telephone)}}
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div
+				class="form-group ">
+				{# <label>{% trans %}License Number{% endtrans %}</label> #}
+				{{form_widget(researchMember.licenceNumber)}}
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group  ">
+				<label>
+					{# {% trans %}Institution{% endtrans %}</label> #}
+					{{form_widget(researchMember.institution )}}
+				</div>
+			</div>
+
+			<div class="col-md-1">
+				<div class="form-group  ">
+					<button type="button" class=" btn btn-light-danger btn-sm close  remove-collection-widget     p-2   radius-round ">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	{% endmacro %}
+
+	{% block body %}
+
+
+		<div class="card">
+			<div class="card-header">{% trans %}New application{% endtrans %}</div>
+			<div class="card-body  m-6">
+
+				{{ form_start(protocolForm, { 'attr' : { 'class': 'form-group' } }) }}
+
+				{{form_label(protocolForm.title)}}
+				{{form_widget(protocolForm.title,{id:'title'})}}
+
+				{{form_label(protocolForm.description)}}
+				{{form_widget(protocolForm.description,{id:'description'})}}
+
+
+				<div class="form-group row">
+					<div class="col-6">
+						{{form_label(protocolForm.startDate)}}
+						{{form_widget(protocolForm.startDate,{id:'startDate'})}}
+					</div>
+					<div class="col-6">
+
+						{{form_label(protocolForm.endDate)}}
+						{{form_widget(protocolForm.endDate,{id:'endDate'})}}
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-6">
+						{{form_label(protocolForm.specialResourceRequirement)}}
+						{{form_widget(protocolForm.specialResourceRequirement,{id:'specialResourceRequirement'})}}
+					</div>
+					<div class="col-6">
+						{{form_label(protocolForm.multiSiteCollaboration)}}
+						{{form_widget(protocolForm.multiSiteCollaboration,{id:'multiSiteCollaboration'})}}
+
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-6">
+						{{form_label(protocolForm.studyPopulation)}}
+						{{form_widget(protocolForm.studyPopulation,{id:'studyPopulation'})}}
+					</div>
+					<div class="col-6">
+						{{form_label(protocolForm.studyType)}}
+						{{form_widget(protocolForm.studyType,{id:'studyType'})}}
+
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<div class="col-4">
+						{{form_label(protocolForm.participantCharacter)}}
+						{{form_widget(protocolForm.participantCharacter,{id:'participantCharacter'})}}
+					</div>
+					<div class="col-4">
+						{{form_label(protocolForm.location)}}
+						{{form_widget(protocolForm.location,{id:'location'})}}
+					</div>
+					<div class="col-4">
+						{{form_label(protocolForm.financialDisclosure)}}
+						{{form_widget(protocolForm.financialDisclosure,{id:'financialDisclosure'})}}
+
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-4">
+						{{form_label(protocolForm.ionizingRadiationUse)}}
+						{{form_widget(protocolForm.ionizingRadiationUse,{id:'ionizingRadiationUse'})}}
+					</div>
+					<div class="col-4">
+						{{form_label(protocolForm.investigationalNewDrug)}}
+						{{form_widget(protocolForm.investigationalNewDrug,{id:'investigationalNewDrug'})}}
+					</div>
+					<div class="col-4">
+
+						{{form_label(protocolForm.proceedureUse)}}
+						{{form_widget(protocolForm.proceedureUse,{id:'proceedureUse'})}}
+					</div>
+				</div>
+				<h5 class="m-1 my-6">{% trans %}PARTICIPATING INVESTIGATORS{% endtrans %}:</h5>
+				<span class="m-1 text-muted">{% trans  %}Click the button to add participating investigators{% endtrans  %}</span>
+				<br>
+				<button type="button" class="btn btn-light-primary  add-another-collection-widget btn-sm" data-list-selector="#researchMember-fields-list">
+					<span aria-hidden="true">+</span>
+					{% trans %}Add Participating Investigators{% endtrans %}
+				</button>
+				<div class="row my-4">
+					<ul id="researchMember-fields-list" class="" data-prototype="{{_self.listCoPIs(protocolForm.participatingInvestigators.vars.prototype)|e }}" data-widget-tags="{{ '<div class="row "></div>'|e }}" data-widget-counter="{{ protocolForm.participatingInvestigators|length }}">
+						{% for researcher in protocolForm.participatingInvestigators %}
+							<div class="rdow ">
+								{{ _self.listCoPIs(researcher) }}
+							</div>
+						{% endfor %}
+					</ul>
+				</div>
+
+
+				<div class="row my-4">
+					<div class="col-12">
+
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AttachmentExampleModal">
+							{% trans %}Add an attachment{% endtrans %}
+						</button>
+					</div>
+
+					<div class="col-12">
+						<h5 class="m-1 my-6">{% trans %}Attachments{% endtrans %}:</h5>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Document Type</th>
+									<th>Name</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for attachment_type in application.attachments %}
+									<tr>
+										<td>{{ loop.index }}</td>
+										<td>{{ attachment_type.type }}</td>
+										<td>{{ attachment_type.name }}</td>
+										<td>
+											{# <form method="post" id="deleteAttachment" name="deleteAttachment" action="{{ path('remove_attachment', {'id': attachment_type.id}) }}"
+																						 onsubmit="return confirm('Are you sure you want to remove this item?');">
+																							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ attachment_type.id) }}">
+																							<button class="btn" id="{{attachment_type.id}}"><i class="fa fa-trash text-danger"></i></button>
+																						</form> #}
+											<a href="{{ path('remove_attachment', {'uid': attachment_type.uid}) }}" onclick="return confirm('Are you sure you want to remove this item?');">
+												<i class="fa fa-trash text-danger"></i>
+											</a>
+
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="3">no records found</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+
+				{{form_errors(protocolForm)}}
+				<button class="btn btn-success btn-lg" data-wizard-type="action-submit">{% trans %}Submit application{% endtrans %}</button>
+				{{form_end(protocolForm)}}
+			</div>
+		</div>
+
+
+		<!-- Button trigger modal-->
+
+
+		<!-- Modal-->
+		<div class="modal fade" id="AttachmentExampleModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="AttachmentExampleModalLabel" aria-hidden="true">
+
+			<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="AttachmentExampleModalLabel">{% trans %}Add an attachment{% endtrans %}</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<i aria-hidden="true" class="ki ki-close"></i>
+						</button>
+					</div>
+					<div class="modal-body">
+
+						<div class="flash-message"></div>
+
+						<form id="uploadForm" action="{{ path('protocol_application_update', {'uid': application.uid}) }}" name="attachmentsForm" enctype="multipart/form-data">
+
+							<div class="row">
+								<div class="col-6">
+									{{form_label(attachmentsForm.name)}}
+									{{form_widget(attachmentsForm.name )}}
+								</div>
+
+								<div class="col-6">
+									{{form_label(attachmentsForm.type)}}<br>
+									{{form_widget(attachmentsForm.type )}}
+								</div>
+								<div class="row"></div>
+								<div class="col-12">
+									{{form_label(attachmentsForm.description)}}
+									{{form_widget(attachmentsForm.description )}}
+								</div>
+							</div>
+
+
+							{{form_errors(attachmentsForm)}}
+ 							<button type="submit" class="btn btn-success btn-shadow-hover mt-4 font-weight-bolder w-40 py-3">
+								<i class="fa fa-upload"></i>
+								{% trans %}Upload{% endtrans %}</button>
+							<button class="btn btn-light-primary mt-4  w-40 py-3 font-weight-bold" data-dismiss="modal">{% trans  %}Close{% endtrans  %}</button>
+
+							<div class="progress my-2">
+								<div style="height: 25px;" class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" id="uploadStatus" aria-valuenow="0" aria-valuemax="100"></div>
+							</div>
+
+							{{form_end(attachmentsForm)}}
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		{% endblock %}
+		{% block javascripts %}
+			<script src="{{ asset('theme/assets/js/pages/custom/wizard/wizard-1.js' ) }}"></script>
+			<script type='text/javascript'>
+				jQuery(document).ready(function () {
+
+$(document).on('click', '.remove-collection-widget', function (e) {
+$(this).closest('.row').fadeOut().remove();
+});
+$(document).on('click', '.add-another-collection-widget', function (e) {
+
+var list = jQuery(jQuery(this).attr('data-list-selector'));
+
+var counter = list.data('widget-counter') || list.children().length;
+var newWidget = list.attr('data-prototype');
+newWidget = newWidget.replace(/__name__/g, counter);
+counter++;
+list.data('widget-counter', counter);
+var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
+newElem.appendTo(list);
+$(".select").select2("destroy").select2();
+
+});
+});
+			</script>
+
+
+			<script type='text/javascript'>
+
+				const uploadForm = document.getElementById('uploadForm');
+const progressBar = document.querySelector('.progress-bar');
+const progressContainer = document.querySelector('.progress');
+const uploadStatus = document.getElementById('uploadStatus');
+
+uploadForm.addEventListener('submit', (event) => {
+event.preventDefault();
+const formData = new FormData(uploadForm);
+const xhr = new XMLHttpRequest();
+
+xhr.open('POST', '{{ path('protocol_application_update', {'uid': application.uid}) }}', true);
+
+xhr.upload.onprogress = function (event) {
+updateProgress(event, xhr, progressBar, uploadStatus);
+};
+
+xhr.onloadstart = function () {
+progressContainer.style.display = 'block';
+progressBar.style.width = '0%';
+progressBar.setAttribute('aria-valuenow', 0);
+uploadStatus.textContent = 'Upload starting...';
+};
+
+xhr.onload = function () {
+progressContainer.style.display = 'none';
+handleResponse(xhr);
+};
+
+xhr.onerror = function () {
+progressContainer.style.display = 'none';
+displayFlashMessage('error', 'Upload failed due to a network error.');
+};
+
+xhr.onabort = function () {
+progressContainer.style.display = 'none';
+displayFlashMessage('error', 'Upload aborted.');
+};
+
+xhr.send(formData);
+});
+
+function handleResponse(xhr) {
+try {
+const response = xhr.responseText ? JSON.parse(xhr.responseText) : null;
+if (response && response.message) {
+displayFlashMessage('success', response.message);
+uploadForm.reset();
+location.reload();
+
+} else {
+displayFlashMessage('error', 'Upload successful, but unexpected response from server.');
+}
+} catch (error) {
+displayFlashMessage('error', 'An unexpected error occurred.');
+uploadForm.reset();
+}
+}
+
+function displayFlashMessage(type, message) {
+const flashMessage = document.createElement('div');
+flashMessage.className = `flash-message ${type}`;
+flashMessage.textContent = message;
+document.body.appendChild(flashMessage);
+setTimeout(() => {
+document.body.removeChild(flashMessage);
+}, 3000);
+}
+
+function updateProgress(event, xhr, progressBar, uploadStatus) {
+if (event.lengthComputable) {
+const percentComplete = (event.loaded / event.total) * 100;
+progressBar.style.width = percentComplete + '%';
+progressBar.setAttribute('aria-valuenow', percentComplete);
+uploadStatus.textContent = `Uploading... ${
+percentComplete.toFixed(0)
+}%`;
+} else {
+uploadStatus.textContent = 'Uploading...';
+}
+}
+			</script>
+
+		{% endblock %}

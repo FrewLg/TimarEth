@@ -1,0 +1,231 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+		<style>
+			/** Define the margins of your page **/
+			@page {
+				margin: 100px;
+				font-size: 12px;
+			}
+
+			header {
+				position: fixed;
+				top: -60px;
+				left: 0;
+				right: 0;
+				height: 50px;
+
+				/** Extra personal styles **/
+				/* background-color: #03a9f4; */
+				color: #003A65;
+				text-align: center;
+				line-height: 35px;
+			}
+
+
+			footer {
+				position: fixed;
+				bottom: -60px;
+				left: 0;
+				right: 0;
+				height: 50px;
+
+				/** Extra personal styles **/
+				/* background-color: #03a9f4; */
+				color: #003A65;
+				text-align: center;
+				line-height: 35px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Define header and footer blocks before your content -->
+		<header>
+
+
+			{{app_name}}
+			{{app_description}}
+		</header>
+		{% if orglogos %}
+			<img src="{{ orglogos }}" width="60" height="60" alt="Logo"/>
+		{% endif %}
+		<main>
+
+			<br>
+			{{ review_assignment.application.title}}
+			<br>
+			Researcher/ PI:
+			{{ review_assignment.application.submittedBy}}
+			<br>
+			{% if review_assignment.reviewerResponses|length >0   %}
+				<table class="table table-bordered m-2 table-stripped small">
+
+					<tbody>
+
+						{% for checklist_group in irb_review_checklist_group %}
+
+							{% if checklist_group.reviewChecklists|filter(checklist => checklist.reviewForm != review_assignment.reviewForm)|length == 0 %}
+								<tr>
+									<th>{{toAlpha(loop.index)}}.
+										{{checklist_group}}</th>
+
+									<th>Response</th>
+									<th>Comment</th>
+								</tr>
+								{% set parents = {} %}
+								{% for checklist in review_assignment.reviewerResponses|filter(  checklist =>  (checklist.checklist.checklistGroup ==  checklist_group) ) %}
+
+									{% if checklist.checklist.parent %}
+										{% set parents = parents|merge({("key" ~ checklist.checklist.parent.id):checklist.checklist.parent}) %}
+
+									{% else %}
+										<tr>
+											<td>
+												<p style="margin-left:10px">{{ loop.index}}.
+													{{checklist}}</p>
+											</td>
+											<td {% if checklist.checklist.answerType ==2 %} colspan="2" {% endif %}>
+												{% if checklist.checklist.answerType ==1 and checklist.answer == 'Yes' %}
+													<span class="label label-lg label-light-success label-inline">
+														<i class="fa fa-check text-success m-1 font-size-sm"></i>
+														Yes</span>
+
+												{% elseif checklist.checklist.answerType ==1 and checklist.answer == 'no' %}
+													<span class="label label-lg label-light-danger label-inline">
+														<i class="fa fa-times text-danger m-1 font-size-sm"></i>
+														No</span>
+												{% elseif checklist.checklist.answerType ==2  %}
+												{{ checklist.answer  }}
+												{% else    %}
+													{{ checklist.answer  }}
+												{% endif %}
+											</td>
+											<td>
+												{{ checklist.comment }}</td>
+										</tr>
+									{% endif %}
+
+								{% endfor %}
+								{% for checklist_parent in parents %}
+									<tr>
+										<th>
+											<b style="margin-left:10px">{{toRoman(loop.index)}}.
+												{{checklist_parent}}</b>
+										</th>
+										<th>Response</th>
+									</tr>
+									{% for checklist in review_assignment.reviewerResponses|filter(checklist =>  (checklist.checklist.answerType==1 and  checklist.checklist.parent ==  checklist_parent)) %}
+										<tr>
+											<td>
+												<p style="margin-left:20px">{{loop.index}}.
+													{{checklist}}</p>
+											</td>
+											<td>{{ checklist.answer }}</td>
+										</tr>
+
+									{% endfor %}
+								{% endfor %}
+							{% endif %}
+
+						{% endfor %}
+					</tbody>
+				</table>
+			{% else %}
+				no response
+			{% endif %}
+
+			<div style="page-break-after: never;">
+				<br>
+				<b>Protocol title:
+					{{ review_assignment.application.title}}</b>
+				<br>
+				<b>Application Id:
+					{{ review_assignment.application.ibcode}}</b><br>
+				<b>Principal Investigator:
+					{{ review_assignment.application.submittedBy}}</b><br>
+				<b>Recommendation:{{ review_assignment.recommendation}}</b>
+				<br>
+				<table class="table m-2 table-borderless">
+					<tr>
+						<td>Reviewer:</td>
+						<td>
+							<u>
+								<b>{{ review_assignment.irbreviewer}}</b>
+							</u>
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+						<td>Chairman:</td>
+
+						<td>
+							<u>
+								<b>{{ review_assignment.irbreviewer}}</b>
+							</u>
+						</td>
+
+					</tr>
+					<tr>
+						<td>Date:</td>
+
+						<td>
+							<u>
+								<b>{{ review_assignment.reviewedAt|date('d M, y  ')}}</b>
+							</u>
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>Date:</td>
+
+						<td>
+							<u>
+								<b>{{ review_assignment.reviewedAt|date('d M, y  ')}}</b>
+							</u>
+						</td>
+					</tr>
+
+					<tr>
+						<td>Signature:</td>
+						<td>
+							{% if review_assignment.irbreviewer.profile.signature %}
+
+								<img src="{{ chairmanSign }}" height="60" alt="Logo"/>
+							{% endif %}
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+						<td>Signature:</td>
+
+						<td>
+							{% if review_assignment.irbreviewer.profile.signature %}
+
+								<img src="{{ chairmanSign }}" height="60" alt="Logo"/>
+							{% endif %}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</main>
+
+
+		<footer>
+			Copyright &copy;
+			<script>
+				document.write(new Date().getFullYear())
+			</script>
+			{{app_name}}
+		</footer>
+
+		{# <main>
+										<p style="page-break-after: always;">
+										{{ review_assignment.irbreviewer}}
+										</p>
+										<div class="card card-custom gutter-b">
+										
+										<p style="page-break-after: never;">
+										Signature
+										</p>
+										</div>
+										</main> #}
+	</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Meeting Schedule
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="card card-custom gutter-b">
+		<div class="card-header">
+			<div class="card-title">
+ 
+				<h3 class="card-label">{% trans %}Edit Meeting Schedules{% endtrans %}</h3>
+			</div>
+			<div class="card-toolbar">
+
+ 
+
+			</div>
+		</div>
+		<div class="card-body">
+
+
+			{{ include('sero/meeting_schedule/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+		</div>
+	</div>
+
+{% endblock %}

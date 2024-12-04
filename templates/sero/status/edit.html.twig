@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Status{% endblock %}
+
+{% block body %}
+    <h1>Edit Status</h1>
+
+    {{ include('sero/status/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_s_e_r_o_status_index') }}">back to list</a>
+
+ {% endblock %}

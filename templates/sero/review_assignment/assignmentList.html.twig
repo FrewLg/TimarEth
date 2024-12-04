@@ -1,0 +1,62 @@
+ 
+<table class="table table-sm   ">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>{% trans %}Reviewer{% endtrans %}</th>
+			<th>{% trans %}Directorate{% endtrans %}</th>
+			<th>{% trans %}Membership{% endtrans %}</th>
+			<th>{% trans %}Assigned at{% endtrans %}</th>
+			<th>{% trans %}Invitation Response Due date{% endtrans %}</th>
+			<th>{% trans %}Review Due date{% endtrans %}</th>
+			<th>{% trans %}Actions{% endtrans %}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for review_assignment in irb_review_assignment    %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>
+
+					{% if review_assignment.reviewerType ==1 %}
+						{{ review_assignment.irbreviewer }}
+						<span class="label label-light-primary ">P</span>
+					{% elseif review_assignment.reviewerType ==2 %}
+						{{ review_assignment.secReviewer }}
+						<span class="label label-light-warning ">S</span>
+					{% endif %}
+				</td>
+				<td>
+					{% if review_assignment.irbreviewer %}
+						{{ review_assignment.irbreviewer.profile.dirctorate}}
+					{% endif %}
+				</td>
+				<td>
+					{% if review_assignment.reviewerType ==1 %}
+						<span class="label label-light-success label-inline">
+							{% trans %}Primary{% endtrans %}</span>
+					{% elseif review_assignment.reviewerType ==2 %}
+						<span class="label label-light-warning label-inline">
+							{% trans %}Secondary{% endtrans %}</span>
+					{% endif %}
+				</td>
+				<td>{{ review_assignment.InvitationSentAt ? review_assignment.InvitationSentAt|date('Y-m-d') : '' }}</td>
+				<td>{{ review_assignment.invitationResponseDueDate ? review_assignment.invitationResponseDueDate|date('Y-m-d') : '' }}</td>
+				<td>{{ review_assignment.duedate ? review_assignment.duedate|date('Y-m-d') : '' }}</td>
+				<td nowrap="nowrap">
+					{% if review_assignment.recommendation %}
+
+						<span class="label label-light-info label-inline">
+							{% trans %}Reviewing{% endtrans %}</span>
+					{% else %}
+						{{ include('sero/review_assignment/_delete_form.html.twig') }}
+					{% endif %}
+				</td>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="3">no records found</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

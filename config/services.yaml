@@ -1,0 +1,62 @@
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    site_settingsfile: '%kernel.project_dir%/config/packages/site_settings.yaml'
+    site_backup_settings_file: '/home/ghost/Desktop/projects/harona/ParameterVariables.sh'
+    site_backup_file: '/home/ghost/Desktop/projects/harona/jubackup.sh'
+    certtemplates: '%kernel.project_dir%/uploads/cert_templates'
+    project_dir: '%kernel.project_dir%/'
+    uploads_folder: '%kernel.project_dir%/uploads' 
+    downloadable_templates: '%kernel.project_dir%/uploads/downloadable_templates' 
+    profile_pictures: '%kernel.project_dir%/public/uploads/files/profile_pictures'
+    signatures: '%kernel.project_dir%/public/uploads/signatures'
+    site_setting: '%kernel.project_dir%/public/files/site_setting/ephi.png'
+    ldap_dc_value : '%env(resolve:LDAP_DC_VALUE)%'
+    app_name  : 'SERO-EPHI'
+    app_url: http://irb.ephi.gov.et #1:8008
+    app_email: irb@ephi.gov.et
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    app.supported_locales: 'en|am|fr|or|sd|af|tg|so'
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # App\EventSubscriber\CalendarSubscriber:
+    App\EventListener\ExceptionListener:
+        # tags: [kernel.event_listener]
+        - { name: kernel.event_listener, event: kernel.exception }
+    App\EventSubscriber\CalendarSubscriber:
+        tags:
+        - { name: doctrine.event_subscriber }
+    # App\EventSubscriber\LocaleSubscriber:
+    #     arguments: ['%kernel.default_locale%']
+    # App\EventSubscriber\EntityLoggingSubscriber:
+    #     arguments:
+    #         $logger: '@logger'
+    #     tags:
+    #         - { name: doctrine.event_subscriber }
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+knp_paginator:
+    page_range: 6                       # number of links shown in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links to page 4, 5, 6)
+    default_options:
+        page_name: page                 # page query parameter name
+        sort_field_name: sort           # sort field query parameter name
+        sort_direction_name: direction  # sort direction query parameter name
+        distinct: true                  # ensure distinct results, useful when ORM queries are using GROUP BY statements
+        filter_field_name: filterField  # filter field query parameter name
+        filter_value_name: filterValue  # filter value query parameter name
+    template:
+        pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig'     # sliding pagination controls template
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
+        filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template

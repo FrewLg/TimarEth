@@ -1,0 +1,200 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+
+	{% trans %}My Protocol applications{% endtrans %}
+{% endblock  %}
+
+{% block body %}
+
+	<div class="modal fade " id="exampleModalScrollable" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">{% trans %}Submit a New Protocol{% endtrans %}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+				</div>
+				<div class="modal-body" style="height: 300px;">
+					{% trans %}Submission Instruction{% endtrans %}:
+
+					{{form_start(initialForm)}}
+					<div class="row">
+
+						<div class="col-12">
+							{{form_label(initialForm.title)}}
+							{{form_widget(initialForm.title )}}
+						</div>
+
+						<div class="col-12">
+							{{form_label(initialForm.description)}}
+							{{form_widget(initialForm.description )}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">
+							{{form_label(initialForm.startDate)}}
+							{{form_widget(initialForm.startDate )}}
+						</div>
+
+						<div class="col-6">
+							{{form_label(initialForm.endDate)}}
+							{{form_widget(initialForm.endDate )}}
+						</div>
+					</div>
+
+					{{form_errors(initialForm)}}
+					{# <button class="btn btn-success btn-lg" data-wizard-type="action-submit">{% trans %}Upload{% endtrans %}</button> #}
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
+					<button class="btn btn-primary font-weight-bold">{% trans %}Save and continue{% endtrans %}</button>
+				</div>
+				{{form_end(initialForm)}}
+			</div>
+		</div>
+	</div>
+
+	<div class="card card-custom gutter-b my-0">
+		<div class="card-header">
+			<div class="card-title">
+				<h3 class="card-label">{% trans %}My Protocol applications{% endtrans %}
+				</h3>
+			</div>
+			<div class="card-title">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+					{% trans %}Submit a new Protocol application{% endtrans %}</button>
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="example-preview">
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="active-apps-tab" data-toggle="tab" href="#active-apps">
+							<span class="nav-icon">
+								<i class="flaticon-paper-plane"></i>
+								{# <i class="flaticon2-graph-1 text-dark"></i> #}
+							</span>
+							<span class="nav-text">
+								{% trans %}All Active{% endtrans %}
+
+								{% if applications|length>0%}
+
+									<span class="label label-sm label-primary mr-2">{{applications|length}}</span>
+									{% else %}
+
+								{% endif %}
+							</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " id="closedApps" data-toggle="tab" href="#closedAppstab" aria-controls="closedAppstab">
+							<span class="nav-icon">
+								<i class="flaticon-web"></i>
+							</span>
+							<span class="nav-text">
+								{% trans %}Archived applications{% endtrans %}
+							</span>
+						</a>
+					</li>
+
+				</ul>
+				<div class="tab-content mt-5" id="myTabContent">
+					<div class="tab-pane fade active show" id="active-apps" role="tabpanel" aria-labelledby="active-apps-tab">
+
+						{% if applications|length>0%}
+
+							<table class="table table-separate table-head-custom table-checkable dataTable no-footer dtr-inline collapsed" id="kt_datatable_2" role="grid" aria-describedby="kt_datatable_2_info">
+								<thead>
+									<tr>
+
+										<th>#</th>
+										<th>{% trans %}Title{% endtrans %}</th>
+										{# <th>{% trans %}Sent at{% endtrans %}</th> #}
+										<th>{% trans %}IRB CODE{% endtrans %}</th>
+										<th>{% trans %}Review Mode
+											{% endtrans %}</th>
+
+										<th nowrap='nowrap'>
+											{% trans %}Status{% endtrans %}
+										</th>
+										<th>
+											<i class="fa fa-cog"></i>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for application in applications %}
+										<tr>
+											<td nowrap='nowrap'>
+												{{loop.index}}
+											</td>
+											<td>
+												<a href="{{ path('application_show', {'uid': application.uid}) }}">{{ application.title }}</a>
+												<br>
+												<snap class="text-muted">{{ application.createdAt ? application.createdAt|date('d M, y H:ia ') : '' }}
+												</span>
+											</td>
+
+
+											<td nowrap='nowrap'>
+												{% if application.ibcode %}
+													{{application.ibcode }}
+												{% endif %}
+											</td>
+											<td>
+												{% if application.reviewMode %}
+
+													<label class="label label-light-{{application.reviewMode.color}} label-inline">
+														{{application.reviewMode}}
+													{% endif %}
+												</td>
+											</td>
+											<td nowrap='nowrap'>
+												<label class="label label-light-{{application.status.color}} label-inline">
+													{{application.status}}</td>
+											</td>
+											<td nowrap="nowrap">
+												{% if application.status.code=="DRAFT" %}
+
+													<a href="{{ path('protocol_application_update', {'uid': application.uid}) }}" class='btn btn-light-info btn-sm'>
+														<i class="fa fa-arrow-right"></i>
+
+														{% trans %}Continue Submission{% endtrans %}
+													</a>
+												{% else %}
+
+													<a href="{{ path('application_show', {'uid': application.uid}) }}" class='btn btn-light-primary btn-sm'>
+														<i class="fa fa-eye"></i>
+
+														Details</a>
+												{% endif %}
+
+											</td>
+										</tr>
+									{% else %}
+										<tr>
+											<td colspan="9">no records found</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						{% endif %}
+						<div class="navigation">{{ knp_pagination_render(applications ) }}</div>
+
+					</div>
+
+					<div class="tab-pane fade " id="closedAppstab" role="tabpanel" aria-labelledby="closedApps">
+						<div class="table-responsive"></div>
+					</div>
+					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Tab content 3</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

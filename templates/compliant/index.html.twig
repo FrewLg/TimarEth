@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compliant index{% endblock %}
+
+{% block body %}
+    <h1>Compliants</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Submited At</th>
+                <th>Solved</th> 
+            </tr>
+        </thead>
+        <tbody>
+        {% for compliant in compliants %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ compliant.name }}</td>
+                <td>{{ compliant.email }}</td>
+                <td>{{ compliant.message }}</td>
+                <td>{{ compliant.createdAt ? compliant.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ compliant.solved ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_compliant_show', {'id': compliant.id}) }}">show</a>
+                 </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+ {% endblock %}

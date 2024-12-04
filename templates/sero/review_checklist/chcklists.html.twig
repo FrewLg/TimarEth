@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	{% trans %}Make Revision{% endtrans %}
+{% endblock %}
+{% block container_title %}
+	{% trans %}Make Revision{% endtrans %}
+{% endblock %}
+{% block body %}
+	<div class="tab-pane p-3  active" id="review-checklist" role="tabpanel">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="font-weight-bold  text-uppercase">
+					{% trans %}Make Revision{% endtrans %}
+				</h4>
+
+				<small class="label label-light-success label-inline text-uppercase">
+
+					{{ review_assignment.reviewForm}}
+				</small>
+				<br>
+
+				<span class=" font-weight-bold text-muted text-uppercase">
+					{{review_assignment.application.title}}
+				</span>
+			</div>
+			<div class="card-body">
+
+
+				<b>{% trans %}IRB CODE{% endtrans %}:</b>
+				<p>
+					{{review_assignment.application.ibcode}}</p>
+
+				<h5 class="text-title">{% trans %}Instruction for Reviewer{% endtrans %}</h5>
+				<p>
+					{{review_assignment.reviewForm.instructionForReviewer|raw}}
+				</p>
+
+				<div>
+					<form method="POST" class="form-group" onsubmit="return confirm('Submit a review response?')">
+						<input hidden name="review-checklist" value="true"/>
+						<input hidden name="review-comments" value="true"/>
+						<table class="table table- ">
+							<tbody>
+								{% for checklist_group in irb_review_checklist_group  %}
+									{% if checklist_group.reviewChecklists|filter(checklist => checklist.reviewForm != review_assignment.reviewForm)|length == 0 %}
+
+										<tr>
+											<th>{{toAlpha(loop.index)}}.
+												{{checklist_group}}</th>
+											<th>{% trans %}Comment{% endtrans %}</th>
+										</tr>
+
+										{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and   checklist.reviewForm == review_assignment.reviewForm)) %}
+
+											{% if checklist.reviewChecklists|length >0 %}
+												<tr>
+													<th>
+														<b style="margin-left:10px">{{ loop.index}}.
+															{{checklist}}</b>
+													</th>
+
+													<th>{% trans %}Comment{% endtrans %}</th>
+												</tr>
+												{% for child in checklist.reviewChecklists %}{% endfor %}
+											{% else %}
+
+
+												<tr class="radio-inline" id="child-question-1">
+													<td>
+														<p style="margin-left:10px">
+															{{loop.index}}.
+															{{checklist}}
+														</p>
+														{% for choice in checklist.answers %}
+															<div class="radio-inline">
+																<label class="radio radio-outline radio-outline-2x radio-success">
+																	<input type="radio" required name="checklist[{{checklist.id}}]" value="{{ choice.choiceName}}">
+																	<span></span>
+																	{{ choice.choiceName}}
+																</label>
+															</div>
+														{% endfor %}
+													</td>
+													<td>
+														<textarea name="comment[{{checklist.id}}]" class="form-control"></textarea>
+													</td>
+												</tr>
+											{% endif %}
+
+										{% endfor %}
+										{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  checklist.answerType==2 and   checklist.reviewForm == review_assignment.reviewForm) %}
+
+											<tr>
+												<td colspan="5">{{checklist}}
+													<textarea name="checklist[{{checklist.id}}]" class=" form-control"></textarea>
+													<input type="hidden" name="comment[{{checklist.id}}]">
+												</td>
+											</tr>
+										{% endfor %}
+									{% endif %}
+
+								{% endfor %}
+							</tbody>
+						</table>
+						<hr>
+
+						<h4>
+							Assessment Report</h4>
+
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<div class="radio-inline">
+								{% for recommendation in revs %}
+
+
+									<label class="radio radio-outline radio-{{recommendation.color}}">
+										<input type="radio" name='decision' value="{{recommendation.id}}">{{recommendation.name}}
+										<span></span>
+									</label>
+								{% endfor  %}
+
+
+							</div>
+
+
+							{# <a type="button" href="{{ path('initial_decision', {'dec': decision.id , 'id': version.id}) }}" onclick="return confirm('Are you sure you want to make a {{decision.name}} decision to this version of protocol?');" class="btn btn-light-{{decision.color}}">{{decision.name}}</a> #}
+							{# {% endfor %} #}
+						</div>
+
+						<br>
+						<hr>
+						<button class="btn btn-primary btn-lg">
+							{% trans %}Submit a Review Response{% endtrans %}</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block javascript %}
+
+	<script type="text/javascript">
+		function handleSkipLogic() {
+const parentQuestions = document.querySelectorAll('[data-skip]');
+
+parentQuestions.forEach(question => {
+const childQuestionIds = question.getAttribute('data-skip').split(' ');
+const selectedValue = question.querySelector('input:checked') ?. value;
+
+childQuestionIds.forEach(id => {
+const childQuestion = document.getElementById(id);
+childQuestion.style.display = selectedValue === 'No' ? 'none' : 'table-row';
+});
+});
+}
+
+// Call the function when the page loads and when the radio buttons are clicked
+window.addEventListener('load', handleSkipLogic);
+document.querySelectorAll('input[type="radio"]').forEach(radio => {
+radio.addEventListener('change', handleSkipLogic);
+});
+	</script>
+{% endblock %}

@@ -1,0 +1,53 @@
+	<div class="card">
+		<div class="card-header" id="headingOne4">
+			<div class="card-title" data-toggle="collapse" data-target="#specialResRequirement_form">
+				<i class="flaticon-cart"></i>
+				Special Resources Requirements
+			</div>
+		</div>
+		<div id="collapseOne1" class="collapse  " data-parent="#accordionExample1">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-4">
+						<div class="card">
+							<div class="card-body">
+								{{ form_start(specialResRequirement_form) }}
+								{{ form_widget(specialResRequirement_form) }}
+								<button class="btn btn-light-success">{{ button_label|default('Save')
+									}}</button>
+								{{ form_end(specialResRequirement_form) }}
+							</div>
+						</div>
+					</div>
+					<div class="col-8">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Name</th>
+									<th>actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for data in special_res_requirements %}
+								<tr>
+									<td>{{ data.id }}</td>
+									<td>{{ data.name }}</td>
+									<td>
+										{#
+										<!-- <a href="{{ path('multiSiteCollaboration_edit', {'id': multiSiteCollaboration.id}) }}">edit</a> -->
+										#}
+									</td>
+								</tr>
+								{% else %}
+								<tr>
+									<td colspan="4">no records found</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

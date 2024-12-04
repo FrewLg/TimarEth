@@ -1,0 +1,241 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+		<style>
+			/** Define the margins of your page **/
+			@page {
+				margin: 80px;
+				font-size: 12px;
+			}
+
+			header {
+				position: fixed;
+				top: -60px;
+				left: 0;
+				right: 0;
+				height: 50px;
+
+				/** Extra personal styles **/
+				/* background-color: #03a9f4; */
+				color: #003A65;
+				text-align: center;
+				line-height: 35px;
+				/* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
+
+			}
+			hr {
+				margin-top: 1rem;
+				margin-bottom: 1rem;
+				border: 0;
+				border-top: 1px solid rgba(0, 0, 0, 0.1);
+			}
+
+			footer {
+				position: fixed;
+				bottom: -60px;
+				left: 0;
+				right: 0;
+				height: 50px;
+				text-align: center;
+				line-height: 35px;
+			}
+		</style>
+	</head>
+
+	<header>
+		<center>
+
+			<table style="margin:2px;padding:2px;">
+				<tr>
+					<td>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+					</td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+					<td>
+
+						{% if orglogos %}
+							<img src="{{ orglogos }}" width="60" height="60" alt="Logo"/>
+						{% endif %}
+					</td>
+					<td style="margin:12px;padding:12px;">
+
+
+						<h3>
+
+							Ethiopian Public Health Institute
+							<br>
+							Institutional Review Board (EPHI-IRB)
+						</h3>
+					</td>
+
+				</tr>
+
+			</table>
+		</center>
+
+	</header>
+	<body>
+		<main>
+			<div class="">
+
+				<div class="" data-aos="fade-up">
+					<div class="" data-aos="fade-up">
+						<br>
+						<hr style="height:0.02rem;">
+						<br>
+						<h4>
+							<center>
+								Certificate of Approval
+							</center>
+						</h4>
+						<p class="float-end">{% trans %}Protocol number{% endtrans %}
+							:<u>
+								<b>{{ irb.certificateCode }}</b>
+							</u>
+						</p>
+						<p>
+							Minutes No.: 232-23-09-2024
+						</p>
+						<p>Protocol Title:
+							{{ irb.irbApplication.title }}</p>
+						<p class="font-weight-bold ">Investigators:</p>
+						<table class="table     font-size-sm">
+							<tr>
+								<th>Full name</th>
+								<th>Institution</th>
+								<th>Email</th>
+								<th>Tel</th>
+							</tr>
+							<tbody>
+								{{    irb.irbApplication.submittedBy}}
+								<tr>
+									<td>{{irb.irbApplication.submittedBy}}</td>
+									<td>{{ irb.irbApplication.submittedBy.profile.dirctorate}}</td>
+									<td>{{ irb.irbApplication.submittedBy.email}}</td>
+									<td>{{ irb.irbApplication.submittedBy.profile.phoneNumber}}</td>
+
+								</tr>
+
+
+							</tbody>
+						</table>
+						Study site:
+						{{irb.version.application.location}}
+						Mode of Review:
+						{{irb.version.application.reviewMode}}
+
+						<p>Decision of the meeting:
+							<u>
+								<b>Approved</b>
+							</u>
+						</p>
+						<p>I. Elements approved:
+							<ol>
+								<li>Protocol Version No.:
+									{{ irb.version}}</li>
+								<li>Protocol Version Date.:
+									{{ irb.version.createdAt|date('d m, Y')}}</li>
+								<li>ICF Version No.:
+									{{ irb.version}}
+								</li>
+								<li>ICF Version Date.
+									{{ irb.version.createdAt|date('d m, Y')}}</li>
+							</ol>
+						</p>
+
+						<p class="font-weight-bold font-size-sm mr-5 font-size-h6 text-dark-75 ">II. Obligations of the PI:
+							<ol class="text-body font-size-24">
+								<li>Should comply with the standard international & national scientific and ethical guidelines.</li>
+								<li>All amendments and changes made in protocol and consent form needs IRB approval.</li>
+								<li>The PI should report SAE within 48 hours of the event.</li>
+								<li>This approval certificate is valid for only one year (specified bellow). The PI should submit continuation request before expire date of approval, if projects is to continue.</li>
+								<li>Final report/Thesis and Manuscripts should be submitted to the IRB secretariat after completion of the study  .</li>
+							</ol>
+						</p>
+
+						<b>
+							{% trans %}Institutional Review Board Approval Date:{% endtrans %}
+						</b>
+						{{ irb.ApprovedAt | date('d M, Y') }}
+						<p>
+							<b>{% trans %}Approval Period{% endtrans %}</b>
+							: From
+							{{ irb.validFrom | date('d M, Y ')|trans }}
+							To
+							{{ irb.validUntil | date('d M, Y')|trans }}
+						</p>
+						<p>
+							<b>Follow up report expected in</b>
+							:
+							{{irb.version.reportExpectationPeriod}}
+							Months
+						</p>
+						<table class="table   table-borderless">
+							<tr>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>
+									<b>EPHI-IRB Chairperson:</b>
+									<br>
+									<u>
+										Dr. Atkure Wmw
+									</u>
+								</td>
+								<td>
+									<u></u>
+								</td>
+
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+								<td>
+									<b>EPHI Director General:</b>
+									<br>
+									<u>
+										Dr. Mesay Hailu
+
+									</u>
+								</td>
+								<td>
+									<u></u>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>Signature:</td>
+								<td>
+
+									<img src="{{ chairmanSign }}" height="60" alt="Logo"/>
+
+								</td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+								<td>Signature:</td>
+
+								<td>
+
+									<img src="{{ directorGeneralSign }}" height="60" alt="Logo"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+
+				</div>
+			</div>
+
+		</main>
+
+
+	</body>
+	{# <hr> #}
+	<footer>
+	
+		<img src="{{ qr_code }}" alt="QR Code" style="width: 60px; height: 60px;">
+		<span class=" font-weight-bold">{% trans %}Verify here{% endtrans %}:</span>
+		<a href="{{app_url}}/{{ app.request.getLocale() }}/verify-here/{{irb.certificateCode}}">{{app_url}}/{{ app.request.getLocale() }}/verify-here/{{irb.certificateCode}}</a>
+	</footer>
+</html>

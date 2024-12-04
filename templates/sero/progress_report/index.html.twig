@@ -1,0 +1,100 @@
+<h1>Progress Reports</h1>
+<a href="{{ path('progress_report_new',{'uid':application.uid}) }}" class="btn btn-sm btn-light-success pull-right right my-6">Submit New Report</a>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Submitted At</th>
+			<th>Summry</th>
+			<th>Attachment</th>
+			<th>Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for progress_report in application.progressReports %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ progress_report.submittedAt ? progress_report.submittedAt|date('Y-m-d H:i:s') : '' }}</td>
+				<td>{{ progress_report.summary }}</td>
+				<td>
+					{% if  progress_report.attachment  %}
+
+						<form class="m-0" action="{{ path('download', {'filename': progress_report.attachment}) }}" method="post">
+							<button type="submit" name="submit" class="btn btn-light-primary btn-sm">
+								<i class="fa fa-download material-icons"></i>
+								{% trans %}Download Attachment{% endtrans %}</button>
+						</form>
+					{% else %}
+						No file found
+					{% endif %}
+				</td>
+
+				<td>
+					<button type="button" class="btn btn-light-success" data-toggle="modal" data-target="#progressReportModal{{ progress_report.id }}">
+						{% trans %}Details{% endtrans %}
+					</button>
+
+					<div class="modal fade modal-md" id="progressReportModal{{ progress_report.id }}" tabindex="-1" role="dialog" aria-labelledby="progressReportModal{{ progress_report.id }}Label" aria-hidden="true">
+						<div class="modal-dialog modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="progressReportModal{{ progress_report.id }}Label">{% trans %}Progress Report{% endtrans %}</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<i aria-hidden="true" class="ki ki-close"></i>
+									</button>
+								</div>
+								<div class="modal-body">
+									<table class="table">
+										<tbody>
+
+											<tr>
+												<th>SubmittedAt</th>
+												<td>{{ progress_report.submittedAt ? progress_report.submittedAt|date('Y-m-d H:i:s') : '' }}</td>
+											</tr>
+									
+											<tr>
+												<th>Summary</th>
+												<td>{{ progress_report.summary }}</td>
+											</tr>
+											<tr>
+												<th>KeyResultsOfResearch</th>
+												<td>{{ progress_report.keyResultsOfResearch }}</td>
+											</tr>
+											<tr>
+												<th>Challenges</th>
+												<td>{{ progress_report.challenges }}</td>
+											</tr>
+                                            		<tr>
+												<th>Attachment</th>
+												<td>
+													{% if  progress_report.attachment  %}
+
+														<form class="m-0" action="{{ path('download', {'filename': progress_report.attachment}) }}" method="post">
+															<button type="submit" name="submit" class="btn btn-light-primary btn-sm">
+																<i class="fa fa-download material-icons"></i>
+																{% trans %}Download Attachment{% endtrans %}</button>
+														</form>
+													{% else %}
+														No app file found
+													{% endif %}
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+
+								<div class="modal-footer"></div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="7">no records found</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Progress Report
+{% endblock %}
+
+{% block body %}
+	<div class="card">
+		<div class="card-header">
+			<h1>Submit a New Progress Report</h1>
+		</div>
+
+		<div class="card-body">
+			{{ include('sero/progress_report/_form.html.twig') }}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'loginbase.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
+
+	{{ form_errors(registrationForm) }}
+	{{ form_start(registrationForm) }}
+
+	<div class="form-group mb-5">
+		{{ form_row(registrationForm.email) }}
+	</div>
+
+	<div class="form-group mb-5">
+		{{ form_row(registrationForm.plainPassword, {         }) }}
+
+	</div>
+	<div class="form-group mb-5 text-left"></span>
+
+	<div class="form-text text-muted text-center"></div>
+</div>
+<p style="color: #FF0000; font-weight: bold;" id='termsText'>
+
+	<div
+		class="form-group d-flex flex-wrap flex-center mt-10">{# <div class="g-recaptcha" data-sitekey="mypublicdata-sitekey-ofthe-google-panel"></div> #}
+
+	</div>
+</p>
+
+<section  >
+	<p style="color: #FF0000; font-weight: bold;" id='termsText'>
+		<label class="checkbox m-0 text-s">
+			<input type="checkbox" name="agreeTerms"/>
+			{% trans %}
+			I have read and agree to the terms and conditions
+			{% endtrans %}
+			<span></span>
+		</label>
+
+
+		<input type="submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-2" name="submit" value="{% trans %}Sign Up{% endtrans %}!" disabled>
+	</p>
+</section>
+
+
+{{ form_end(registrationForm) }}
+
+{% endblock %}{% block javascripts %}
+<script type="text/javascript">
+	var checkbox = document.querySelector("input[name=agreeTerms]");
+var btn = document.querySelector("input[name=submit]");
+
+checkbox.addEventListener('change', function () {
+if (this.checked) {
+btn.disabled = false;
+} else {
+btn.disabled = true;
+}
+});
+</script>{% endblock %}

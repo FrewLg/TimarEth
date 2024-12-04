@@ -1,0 +1,235 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{% trans %}Application{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+	<div class="card card-custom gutter-b">
+		<div class="card-header flex-wrap border-0 pt-6 pb-0">
+			<div class="card-title">
+				<h3 class="card-label">{% trans %}Applications{% endtrans %}
+
+					<span class="d-block text-muted pt-2 font-size-sm">{% trans %}Protocol applications{% endtrans %}</span>
+				</h3>
+			</div>
+			<div class="card-toolbar">
+				 
+
+				<!--begin::Dropdown-->
+				<div class="dropdown dropdown-inline mr-2">
+					<div
+						class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+						<!--begin::Navigation-->
+						<ul class="navi flex-column navi-hover py-2">
+							<li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose
+																																																																																							an option:</li>
+							<li class="navi-item">
+								<a href="#" class="navi-link">
+									<span class="navi-icon">
+										<i class="la la-print"></i>
+									</span>
+									<span class="navi-text">Print</span>
+								</a>
+							</li>
+							<li class="navi-item">
+								<a href="#" class="navi-link">
+									<span class="navi-icon">
+										<i class="la la-copy"></i>
+									</span>
+									<span class="navi-text">Copy</span>
+								</a>
+							</li>
+							<li class="navi-item">
+								<a href="#" class="navi-link">
+									<span class="navi-icon">
+										<i class="la la-file-excel-o"></i>
+									</span>
+									<span class="navi-text">Excel</span>
+								</a>
+							</li>
+							<li class="navi-item">
+								<a href="#" class="navi-link">
+									<span class="navi-icon">
+										<i class="la la-file-text-o"></i>
+									</span>
+									<span class="navi-text">CSV</span>
+								</a>
+							</li>
+							<li class="navi-item">
+								<a href="#" class="navi-link">
+									<span class="navi-icon">
+										<i class="la la-file-pdf-o"></i>
+									</span>
+									<span class="navi-text">PDF</span>
+								</a>
+							</li>
+						</ul>
+						<!--end::Navigation-->
+					</div>
+					<!--end::Dropdown Menu-->
+				</div>
+
+			</div>
+		</div>
+		<div class="card-body">
+			<!--begin: Search Form-->
+			<!--begin::Search Form-->
+				<div class="mb-7"> <div class="row align-items-center">
+					<div class="col-lg-9 col-xl-8">
+						<div class="row align-items-center">
+							<div class="col-md-9 my-2 my-md-0">
+								<div class="input-icon">
+									<input type="text" class="form-control" placeholder="Search..." id="live_search" autocomplete="off">
+									<span>
+										<i class="flaticon2-search-1 text-muted"></i>
+									</span>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					 
+				</div>
+			</div>
+			<form name="" id="user_list_form" method="post">
+				<table class="table text-body h6 small  table-responsive">
+					<thead>
+						<tr>
+							<th
+								nowrap='nowrap'>
+								 
+								#
+							</th>
+
+							<th>{% trans %}Title{% endtrans %}</th>
+							<th nowrap="nowrap">{% trans %}Review Mode{% endtrans %}</th>
+							<th>{% trans %}Assignment{% endtrans %}</th>
+							<th>{% trans %}actions{% endtrans %}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<div id="searchResult">
+							{% for application in applications %}
+								<tr class="ribbon ribbon-left">
+									<td nowrap='nowrap'>
+										{# {% if application.status %}
+
+											<div class="ribbon-target bg-{{application.status.color}}" style="top: -2px; right: 20px;">
+												<small>
+													{{  application.status.name}}</small>
+											</div>
+										{% endif %} #}
+										{{loop.index}}
+									</td>
+									<td>
+										<a href="{{ path('application_show', {'uid': application.uid}) }}" class='text-body dark'>{{ application.title }}</a>
+<br>
+										<b class="text-s">
+											{{ application.ibcode }}
+											<span class='label label-light-warning label-inline'>{{ application.versions|length}}
+												{% trans %}V{% endtrans %}
+											</span>
+											<small>
+												<span class="text-muted">{{ application.submittedBy}}</span>
+ 											</small>
+										</b>
+										<p class="font-weight-lighter text-muted">
+											<small>
+
+												{{ application.createdAt ? application.createdAt|date('d M, y H:ia') : '' }}
+											</small>
+										</p>
+										{# <a href="{{ path('application_show', {'uid': application.uid}) }}" class='text-body dark'>{{ application.title }}</a> #}
+										{% if application.status %}
+											{# <br> #}
+											<span class='label label-light-{{application.status.color}} label-inline'>{{  application.status.name}}
+											{% endif %}
+										</span>
+									</td>
+									<td>
+										{% if application.reviewMode %}
+											<span class="label label-inline label-light-{{application.reviewMode.color}}">{{application.reviewMode.name}}</span>
+										{% else %}
+											<span class="label label-inline label-light-default">{%trans %}Waiting{% endtrans %}</span>
+										{% endif %}
+									</td>
+									<td>
+										{% if application.reviewAssignments|length>=0 %}
+											{% set count = 0 %}
+											{% for confirmation in application.reviewAssignments('closed') %}
+												{% set count = count + 1 %}
+												{% if confirmation.closed()|length==0 %}
+													<span class='label label-light-warning'>
+														{{count}}
+														{% if count==0 %}
+															{% elseif count<=1 %}
+																<sup>st</sup>
+															{% elseif count<=2%}
+																<sup>nd</sup>
+															{% elseif count<=3%}
+																<sup>rd</sup>
+															{% elseif count>=4%}
+																<sup>th</sup>
+														{% endif %}
+													</span>
+
+												{% elseif confirmation.closed() %}
+													<span class='label label-light-success'>
+														{{count}}
+														{% if count==0 %}
+															{% elseif count<=1 %}
+																<sup>st</sup>
+															{% elseif count<=2%}
+																<sup>nd</sup>
+															{% elseif count<=3%}
+																<sup>rd</sup>
+															{% elseif count>=4%}
+																<sup>th</sup>
+														{% endif %}
+													</span>
+												{% endif %}
+											{% else %}
+
+												<span class='label label-light-danger label-inline'>
+													{% trans %}Unassigned{% endtrans %}
+												</span>
+											{% endfor %}
+
+										{% endif %}
+
+									</td>
+
+									<td nowrap="nowrap">
+										<a href="{{ path('application_show', {'uid': application.uid}) }}" class='btn btn-light-success btn-sm'>Show
+											<i class="fas fa-eye small"></i>
+										</a>
+										{# <a href="{{ path('ethical_clearance_cert', {'id': application.id}) }}" class='btn btn-light-info btn-sm'>Certify</a> #}
+										{# <a href="{{ path('clearance', {'id': application.id}) }}">
+																																									Stat
+																																								</a> #}
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="9">{%trans %}no records found{% endtrans %}
+									</td>
+								</tr>
+							{% endfor %}
+						</div>
+					</tbody>
+				</table>
+
+				{# <button id="submit-btn" type="submit" class="btn btn-primary btn-sm">Delete selected</button> #}
+			</form>
+			<div class="border-bottom w-100 opacity-20"></div>
+			<div class="navigation">{{ knp_pagination_render(applications ) }}</div>
+
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

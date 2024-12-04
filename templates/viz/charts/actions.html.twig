@@ -1,0 +1,25 @@
+<script>
+
+		const actionviz = document.getElementById('actionsVizLine');
+
+new Chart(actionviz, {
+type: 'line',
+data: {
+labels: [{% for status in actions %}'{{ status.label }}',{% endfor %}],
+datasets: [
+{
+label: '# of Applications',
+data: [{% for status in actions %}{{ status.label|length }},{% endfor %}],
+borderWidth: 1
+}
+]
+},
+options: {
+scales: {
+y: {
+beginAtZero: true
+}
+}
+}
+});
+</script>

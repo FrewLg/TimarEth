@@ -1,0 +1,11 @@
+knp_snappy:
+    pdf:
+        enabled:    true
+#        binary:     '%env(WKHTMLTOPDF_PATH)%'
+#        binary: '%kernel.project_dir%/vendor/h4cc/wkhtmltopdf-i386/bin/wkhtmltopdf' # Path to wkhtmltopdf binary
+        binary:     /usr/local/bin/wkhtmltopdf #"\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\"" for Windows users
+        options:    []
+    image:
+        enabled:    true
+        binary:     '%env(WKHTMLTOIMAGE_PATH)%'
+        options:    []

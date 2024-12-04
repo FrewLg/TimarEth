@@ -1,0 +1,24 @@
+<script>
+	const ctxs = document.getElementById('AppStatusVizPolarArea');
+
+new Chart(ctxs, {
+type: 'bar',
+
+data: {
+labels: [{% for status in statuses %}"    {{ status.name }}",{% endfor %}],
+datasets: [
+{ // label: '',//'App status',
+data: [{% for status in statuses %}{{ status.applications|length }},{% endfor %}],
+
+backgroundColor: [
+'rgb(255, 99, 132)',
+'rgb(75, 192, 192)',
+'rgb(255, 205, 86)',
+'rgb(201, 203, 207)',
+'rgb(54, 162, 235)'
+]
+}
+]
+}
+},);
+</script>

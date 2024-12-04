@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Downloadables{% endblock %}
+
+{% block body %}
+    <h1>Create new Downloadables</h1>
+
+    {{ include('downloadables/_form.html.twig') }}
+
+    <a href="{{ path('app_downloadables_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,25 @@
+<script>
+
+		const ctxc = document.getElementById('RevModeVizLine');
+
+new Chart(ctxc, {
+type: 'polarArea',
+data: {
+labels: [{% for status in decisions %}'{{ status.name }}',{% endfor %}],
+datasets: [
+{
+label: '# of Applications',
+data: [{% for status in decisions %}{{ status.applications|length }},{% endfor %}],
+borderWidth: 1
+}
+]
+},
+options: {
+scales: {
+y: {
+beginAtZero: true
+}
+}
+}
+});
+</script>

@@ -1,0 +1,180 @@
+{# {% extends 'widebase.html.twig' %} #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile
+{% endblock %}
+
+{% block styles %}
+	<style>
+		.progress {
+			height: 25px;
+			margin-top: 10px;
+			display: none; /* Initially hidden */
+		}
+		.progress-bar {
+			transition: width 0.6s ease; /* Smooth transition - adjust duration as needed */
+		}
+
+		.flash-message {
+			padding: 10px;
+			margin-bottom: 10px;
+			border-radius: 5px;
+			position: fixed;
+			top: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 1000;
+		}
+		.flash-message.success {
+			background-color: #d4edda;
+			color: #155724;
+		}
+
+		.flash-message.error {
+			background-color: #f8d7da;
+			color: #721c24;
+		}
+	</style>
+
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="flash-message"></div>
+
+
+	<div class="container p-4">
+		<div class="cards">
+
+			<form id="uploadForm" action="{{ path('profile_upload') }}" enctype="multipart/form-data">
+
+
+				<div class="card   p-4">
+
+					<div class="card-header border-0 pt-5">
+						<h3 class="card-title font-weight-bolder">Upload Signature</h3>
+
+					</div>
+					<div class="row ">
+						<div class="col-lg-4">
+							<div class="pt-5">
+
+								<img id="imagePreview" style="width:90%;" class=" normal d"/>
+
+
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="pt-5">
+								<input type="file" name="file" id="uploadInput" class="form-control " required>
+
+								<button type="submit" class="btn btn-success btn-shadow-hover mt-4 font-weight-bolder w-100 py-3">
+									<i class="fa fa-upload"></i>
+									{% trans %}Upload{% endtrans %}</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="progress">
+						<div style="height: 25px;" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" id="uploadStatus" aria-valuenow="0" aria-valuemax="100"></div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	<script type='text/javascript'>
+
+		const uploadForm = document.getElementById('uploadForm');
+const progressBar = document.querySelector('.progress-bar');
+const progressContainer = document.querySelector('.progress');
+const uploadStatus = document.getElementById('uploadStatus');
+
+uploadForm.addEventListener('submit', (event) => {
+event.preventDefault();
+const formData = new FormData(uploadForm);
+const xhr = new XMLHttpRequest();
+
+xhr.open('POST', '{{ path('profile_upload') }}', true);
+
+xhr.upload.onprogress = function (event) {
+updateProgress(event, xhr, progressBar, uploadStatus);
+};
+
+xhr.onloadstart = function () {
+progressContainer.style.display = 'block';
+progressBar.style.width = '0%';
+progressBar.setAttribute('aria-valuenow', 0);
+uploadStatus.textContent = 'Upload starting...';
+};
+
+xhr.onload = function () {
+progressContainer.style.display = 'none';
+handleResponse(xhr);
+};
+
+xhr.onerror = function () {
+progressContainer.style.display = 'none';
+displayFlashMessage('error', 'Upload failed due to a network error.');
+};
+
+xhr.onabort = function () {
+progressContainer.style.display = 'none';
+displayFlashMessage('error', 'Upload aborted.');
+};
+
+xhr.send(formData);
+});
+
+function handleResponse(xhr) {
+try {
+const response = xhr.responseText ? JSON.parse(xhr.responseText) : null;
+if (response && response.message) {
+displayFlashMessage('success', response.message);
+uploadForm.reset();
+} else {
+displayFlashMessage('error', 'Upload successful, but unexpected response from server.');
+}
+} catch (error) {
+displayFlashMessage('error', 'An unexpected error occurred.');
+}
+}
+
+function displayFlashMessage(type, message) {
+const flashMessage = document.createElement('div');
+flashMessage.className = `flash-message ${type}`;
+flashMessage.textContent = message;
+document.body.appendChild(flashMessage);
+setTimeout(() => {
+document.body.removeChild(flashMessage);
+}, 3000);
+}
+
+function updateProgress(event, xhr, progressBar, uploadStatus) {
+if (event.lengthComputable) {
+const percentComplete = (event.loaded / event.total) * 100;
+progressBar.style.width = percentComplete + '%';
+progressBar.setAttribute('aria-valuenow', percentComplete);
+uploadStatus.textContent = `Uploading... ${
+percentComplete.toFixed(0)
+}%`;
+} else {
+uploadStatus.textContent = 'Uploading...';
+}
+}
+
+
+let uploadInput = document.getElementById("uploadInput");
+
+uploadInput.onchange = function () {
+let image = new FileReader();
+
+image.onload = function (e) {
+document.getElementById("imagePreview").src = e.target.result;
+};
+image.readAsDataURL(this.files[0]);
+};
+	</script>
+{% endblock %}

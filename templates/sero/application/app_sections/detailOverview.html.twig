@@ -1,0 +1,127 @@
+<div class="card card-custom">
+	<div class="card-header card-header-tabs-line">
+		<div class="card-title">
+			<h3 class="card-label">
+				<i class="fas fa-journal-whills"></i>
+				{%trans%}Protocol Details{%endtrans%}
+			</h3>
+		</div>
+		<div class="card-toolbar">
+			<ul class="nav nav-tabs nav-bold nav-tabs-line">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1_3">
+						<span class="nav-icon">
+							<i class="fas fa-users"></i>
+						</span>
+						<span class="nav-text">Members</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2_3">
+						<span class="nav-icon">
+							<i class="flaticon2-drop"></i>
+						</span>
+						<span class="nav-text">Summary</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3_3">
+						<span class="nav-icon">
+							<i class="fas fa-paperclip"></i>
+						</span>
+						<span class="nav-text">Attachments</span>
+					</a>
+				</li>
+
+			</ul>
+
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="tab-content">
+			<div class="tab-pane fade show active" id="kt_tab_pane_1_3" role="tabpanel" aria-labelledby="kt_tab_pane_1_3">
+				{%  for member in application.participatingInvestigators %}
+					<!--begin::Item-->
+					<div class="d-flex flex-wrap align-items-center mb-10">
+
+						<div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
+							<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">{{member.fullName}}</a>
+							<span class="text-muted font-weight-bold font-size-sm my-1">
+								<i class="flaticon-placeholder-2 text-success"></i>
+								{{member.institution}}
+								<i class="flaticon-email text-success"></i>
+								{{member.email}}</span>
+							<span class="text-muted font-weight-bold font-size-sm">
+								<i class="flaticon2-phone text-success"></i>
+								{{member.telephone}}
+								<span class="text-primary font-weight-bold">Role</span>
+							</span>
+						</div>
+
+						<div class="d-flex align-items-center py-lg-0 py-2">
+							<div class="d-flex flex-column text-right">
+								<span class="text-dark-75 font-weight-bolder font-size-h4">{{member.licenceNumber}}</span>
+								<span class="text-muted font-size-sm font-weight-bolder">L.No.</span>
+							</div>
+						</div>
+					</div>
+				{%  endfor  %}
+			</div>
+			<div class="tab-pane fade" id="kt_tab_pane_2_3" role="tabpanel" aria-labelledby="kt_tab_pane_2_3">
+				{{application.description}}
+			</div>
+			<div class="tab-pane fade" id="kt_tab_pane_3_3" role="tabpanel" aria-labelledby="kt_tab_pane_3_3">
+
+				<div class="table-responsive">
+
+					<div class="my-2 font-weight-bold ">
+						<span class="label label-light-primary ">
+							{{application.attachments|length}}</span>
+						{% trans %}Attachments{% endtrans %}
+					</div>
+					<table class="table table-sm table-respdonsive">
+						<tbody>
+							{% for attachment in application.attachments %}
+								<tr>
+									<td class=" mt-4 ">{{ loop.index  }}</td>
+ 									<td>
+										{{ attachment.type }}
+										{# <span class="label label-light-danger  p-2 label-inline">
+											{{attachment.version  }}dd</span> #}
+										<small class="text-muted text-small small">
+											<br>
+											{{ attachment.name }}
+											<br>
+											{% if attachment.uploadedAt %}
+
+												{{ attachment.uploadedAt|date('d M, y H:ia ')}}
+											{% endif %}
+										</small>
+									</td>
+									<td>
+										<form action="{{ path('download', {'filename': attachment.name}) }}" method="post">
+
+
+											<button type="submit" name="submit" class="btn btn-light-primary  btn-shadow-hover mt-4 font-weight-bolder w-100 py-3  btn-sm">
+												<i class="fa fa-download material-icons"></i>
+												{% trans %}Download{% endtrans %}</button>
+
+										</form>
+
+									</td>
+
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="5">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
