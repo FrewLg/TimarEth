@@ -1,22 +1,20 @@
 twig:
     globals:  { 
-        app_name: 'EPHI-IRB', 
-        app_description: 'Institutional Review Board System', 
-        organization: EPHI, 
-        # app_url: '', 
-        # app_url: sero.ephi.gov.et, 
-        app_url: "http://irb.ephi.gov.et",
-        app_email: irb@ephi.gov.et,
-        site_logo: ephi.png, 
-        copyright: 'EPHI-IRB', 
+        app_name: 'Opportunities at Timar ', 
+        app_description: 'Timar Ethiopia ', 
+        organization: timar,  
+        app_url: "https://opportunity.timar.et",
+        app_email: opportunity@timar.et,
+        site_logo: timar.png, 
+        copyright: 'timar-opportunity', 
         navbar_background: dark, 
-        acronym: 'EPHI-IRB',
+        acronym: 'timar-opportunity',
         signatures: 'uploads/signatures/' ,
         corporate_color: '#54b4', 
         profile_pictures: 'uploads/files/profile_pictures',
         motto: 'Motto',  
         site_setting: '%kernel.project_dir%/uploads/files/site_setting/',
-        contact_us: 'EPHI-IRB', 
-        about: 'EPHI-IRB',
-        privacy_statement: 'EPHI-IRB' 
+        contact_us: 'timar-opportunity', 
+        about: 'timar-opportunity',
+        privacy_statement: 'timar-opportunity' 
         }

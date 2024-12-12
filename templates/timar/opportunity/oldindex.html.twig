@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Opportunity index{% endblock %}
+
+{% block body %}
+    {# <h1>Opportunity index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Uid</th>
+                <th>PostedDate</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Link</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for opportunity in opportunities %}
+            <tr>
+                <td>{{ opportunity.id }}</td>
+                <td>{{ opportunity.title }}</td>
+                <td>{{ opportunity.uid }}</td>
+                <td>{{ opportunity.postedDate ? opportunity.postedDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ opportunity.description }}</td>
+                <td>{{ opportunity.image }}</td>
+                <td>{{ opportunity.link }}</td>
+                <td>
+                    <a href="{{ path('app_timar_opportunity_show', {'id': opportunity.id}) }}">show</a>
+                    <a href="{{ path('app_timar_opportunity_edit', {'id': opportunity.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> #}
+
+{# templates/opportunity/index.html.twig #}
+ 
+    <div id="opportunity-list">
+        {% for opportunity in opportunities %}
+            <div class="opportunity">
+                <h3>{{ opportunity.title }}</h3>
+                <p>{{ opportunity.description }}</p>
+                <p><a href="{{ opportunity.link }}">View More</a></p>
+            </div>
+        {% endfor %}
+    </div>
+    <button id="load-more">Load More</button>
+
+    <script>
+        let offset = {{ opportunities|length }};
+        const loadMoreButton = document.getElementById('load-more');
+
+        loadMoreButton.addEventListener('click', function () {
+            fetch(`/opportunities/load?offset=${offset}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        data.forEach(opportunity => {
+                            const div = document.createElement('div');
+                            div.classList.add('opportunity');
+                            div.innerHTML = `<h3>${opportunity.title}</h3><p>${opportunity.description}</p><p><a href="${opportunity.link}">View More</a></p>`;
+                            document.getElementById('opportunity-list').appendChild(div);
+                        });
+                        offset += data.length;
+                    } else {
+                        loadMoreButton.style.display = 'none'; // Hide button if no more opportunities
+                    }
+                })
+                .catch(error => console.error('Error loading more opportunities:', error));
+        });
+    </script> 
+    <a href="{{ path('app_timar_opportunity_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+<ul>
+        {% set opportunities = getRecentOpportunities(5) %}
+        {% for opportunity in opportunities %}
+            <li>
+                <h3>{{ opportunity.title }}</h3>
+                <p><strong>Posted Date:</strong> {{ opportunity.postedDate ? opportunity.postedDate|date('Y-m-d') : 'N/A' }}</p>
+                <p>{{ opportunity.description }}</p>
+                {% if opportunity.image %}
+                    <img src="{{ opportunity.image }}" alt="{{ opportunity.title }}">
+                {% endif %}
+                <a href="{{ opportunity.link }}">Apply Here</a>
+            </li>
+        {% else %}
+            <li>No recent opportunities available.</li>
+        {% endfor %}
+    </ul>

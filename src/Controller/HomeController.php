@@ -4,66 +4,105 @@ namespace App\Controller;
 
 use App\Entity\Compliant;
 use App\Entity\SERO\IrbCertificate;
-use Symfony\Component\Translation\LocaleSwitcher;
-use App\Entity\TrainingParticipant;
-use App\Form\CompliantType;
-use App\Form\TrainingParticipantType;
+use App\Entity\Timar\Opportunity;
+use App\Form\CompliantType; 
 use App\Repository\SERO\BoardMemberRepository;
-use App\Repository\TrainingParticipantRepository;
+use App\Repository\Timar\OpportunityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
-use Dompdf\Dompdf;
-use Skies\QRcodeBundle\Generator\Generator;
-use Dompdf\Options;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Routing\Attribute\Route; 
 use Endroid\QrCode\Builder\Builder;
-use Endroid\QrCode\Encoding\Encoding;
-// use Endroid\QrCode\ErrorCorrectionLevel;
-use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
-use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Encoding\Encoding; 
 use Endroid\QrCode\Writer\PngWriter;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+#[Route('{_locale<%app.supported_locales%>}/')]
 
 class HomeController extends AbstractController
 {
-    #[Route('{_locale<%app.supported_locales%>}/', name: 'homepage')]
-    public function index(
-        TranslatorInterface $translator,
-        Request $request,
-        LocaleSwitcher $localeSwitcher
-    ): Response {
-        // Set the active locale to German
-        $localeSwitcher->setLocale('en');
+    
+    protected EntityManagerInterface $entityManager;
 
-        // Retrieve the active locale
-        // $localeSwitcher->getLocale(); // => 'de'
-
-        $locale = $request->getLocale();
-        $mess = "Welcome";
-        return $this->render('homepage/index.html.twig', [
-            'msg' => $mess,
-            'locale' => $locale,
-        ]);
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
     }
 
-    #[Route('{_locale<%app.supported_locales%>}/boardMembers', name: 'boardMembers')]
-    public function boardMembers(
-        Request $request,
-        BoardMemberRepository $boardMemberRepository, 
-        ): Response {
-        // Set the active locale to German
-        $boardMembers= $boardMemberRepository->findAll();
-        
-        return $this->render('homepage/boardMembers.html.twig', [
 
-            'boardMembers' => $boardMembers,
+    #[Route('/', name: 'homepage')]
+
+    public function index(): Response
+    {
+        return $this->renderWithOpportunities('homelayout.html.twig');
+    }
+
+
+    #[Route('/ne', name: 'app_timar_opportunity_index', methods: ['GET'])]
+    public function indexadmin(OpportunityRepository $opportunityRepository): Response
+    {
+        return $this->render('timar/opportunity/index.html.twig', [
+            'opportunities' => $opportunityRepository->findAll(),
         ]);
     }
 
 
-    #[Route('{_locale<%app.supported_locales%>}/about', name: 'about')]
+    
+    // #[Route('/', name: '')]
+    #[Route('/opportunities', name: 'opportunity_list', methods: ['GET'])]
+
+    public function indextwo(EntityManagerInterface $entityManager)
+    {
+        // Load the first batch of opportunities
+        $opportunities = $entityManager->getRepository(Opportunity::class)->findBy([], null, 3);
+
+        return $this->renderWithOpportunities('timar/opportunity/index.html.twig', [
+            'opportunities' => $opportunities,
+            // 'opportunities' => $opportunities,
+        ]);
+    }
+
+
+    #[Route('/allopportunitiess', name: 'all_opportunity_list')]
+    public function listtwo(EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('opportunity/list.html.twig', $this->getGlobalData());
+        // return $this->renderWithOpportunities('timar/opportunity/list.html.twig');
+    }
+
+    
+    protected function renderWithOpportunities(string $view,  array $parameters = [], int $limit = 3)
+{
+    $parameters['opportunities'] = $this->entityManager->getRepository(Opportunity::class)->getRecentOpportunities($limit);
+    // Debug log
+    dump($parameters['opportunities']); // This will output the opportunities
+    return $this->render($view, $parameters);
+}
+
+    #[Route('/opportunities/load', name: 'opportunity_load', methods: ['GET'])]
+    public function loadMoreOpportunities(Request $request)
+    {
+        $offset = (int) $request->query->get('offset', 0);
+        $opportunities = $this->entityManager->getRepository(Opportunity::class)->findBy([], null, 4, $offset);
+
+        // Convert opportunities to an array for JSON response
+        $data = [];
+        foreach ($opportunities as $opportunity) {
+            $data[] = [
+                'title' => $opportunity->getTitle(),
+                'description' => $opportunity->getDescription(),
+                'link' => $opportunity->getLink(),
+            ];
+        }
+
+        return new JsonResponse($data);
+    }
+
+    
+
+
+    #[Route('/about', name: 'about')]
     public function about(
         Request $request,
         BoardMemberRepository $boardMemberRepository, 
@@ -76,76 +115,8 @@ class HomeController extends AbstractController
         ]);
     }
 
-    // #[Route('{_locale<%app.supported_locales%>}/irb-clearancdesd/{certificateCode}', name: 'irb_validate2')]
-    #[Route('{_locale<%app.supported_locales%>}/irb-clearance/', name: 'irb_validate', methods: ['GET', 'POST'])]
-    public function home(Request $request, EntityManagerInterface $em, IrbCertificate $irbCertificate = null): Response
-    {
-        $sentCode = $request->request->get('validate');
-        if ($sentCode) {
-            $irbCertificate = $em->getRepository(IrbCertificate::class)
-                ->findOneBy(['certificateCode' => $sentCode]);
-            if (!$irbCertificate) {
-                $this->addFlash('danger', 'No IRB clearance was issued with "'
-                    . $sentCode . '" code');
-            } else {
-
-                $this->addFlash('success', ' IRB ethical clearance certificate  found "');
-                $srringToGenerate = "Researcher:" . $irbCertificate->getIrbApplication()->getSubmittedBy() . "Protocol Number:" . $irbCertificate->getIrbApplication()->getIbcode() . "Cerificate Number:" . $irbCertificate->getcertificateCode();
-
-                $qrCode = Builder::create()
-                    ->writer(new PngWriter())
-                    ->writerOptions([])
-                    ->data($srringToGenerate)
-                    ->encoding(new Encoding('UTF-8'))
-                    ->size(300)
-                    ->margin(10)
-                    ->build();
-
-                return $this->render('sero/clearance.html.twig', [
-                    'qr_code' => $qrCode->getDataUri(),
-                    'irb' => $irbCertificate
-                ]);
-            }
-        }
-
-        return $this->render('sero/clearance.html.twig', []);
-    }
-
-    #[Route('{_locale<%app.supported_locales%>}/verify-here/{certificateCode}', name: 'verify_by_link', methods: ['GET', 'POST'])]
-    public function clicktlinkoverify(EntityManagerInterface $em,   $certificateCode): Response
-    {
-
-        $irbCertificate = $em->getRepository(IrbCertificate::class)->findOneBy(['certificateCode' => $certificateCode]);
-        if (!$irbCertificate) {
-            $this->addFlash('danger', 'No IRB clearance was issued with the code: ' . $certificateCode . "!");
-        } else {
-
-            $this->addFlash('success', 'Valid IRB ethical clearance certificate');
-            $srringToGenerate = $irbCertificate->getcertificateCode();
-            $srringToGenerate = "Researcher:" . $irbCertificate->getIrbApplication()->getSubmittedBy() .
-                "Protocol Number:" . $irbCertificate->getIrbApplication()->getIbcode() .
-                "Cerificate Number:" . $irbCertificate->getcertificateCode();
-
-            $qrCode = Builder::create()
-                ->writer(new PngWriter())
-                ->writerOptions([])
-                ->data($srringToGenerate)
-                ->encoding(new Encoding('UTF-8'))
-                ->size(300)
-                ->margin(10)
-                ->build();
-
-            return $this->render('sero/clearance.html.twig', [
-                'barcode' => $qrCode->getDataUri(),
-                'qr_code' => $qrCode->getDataUri(),
-                'irb' => $irbCertificate
-            ]);
-        }
-
-        return $this->render('sero/clearance.html.twig', []);
-    }
-
-    #[Route('{_locale<%app.supported_locales%>}/compliant', name: 'compliant', methods: ['GET','POST'])]
+    
+    #[Route('/compliant', name: 'compliant', methods: ['GET','POST'])]
     public function compliants(EntityManagerInterface $entityManager, Request $request): Response
     {
 
@@ -170,7 +141,7 @@ class HomeController extends AbstractController
 
      }
 
-    #[Route('{_locale<%app.supported_locales%>}/developers', name: 'developers', methods: ['GET'])]
+    #[Route('/developers', name: 'developers', methods: ['GET'])]
     public function developers(): Response
     {
 

@@ -32,11 +32,13 @@ security:
                 # enable_csrf: true
                 default_target_path: my_profile
                 # use_referer: true
-
+                # success_handler: App\Security\LoginFormAuthenticator
+                # failure_handler: App\Security\LoginFormAuthenticator
             # login_throttling: null
             login_throttling:
                 max_attempts: 4          # per minute ...
                 # interval: '15 minutes' # ... or in a custom period
+
 
             # use a custom rate limiter via its service ID
             # login_throttling:

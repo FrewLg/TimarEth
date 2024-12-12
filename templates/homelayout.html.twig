@@ -1,1015 +1,467 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>
+
+			{% block title %}{% endblock %}
+
+
+			{{app_name}}</title>
 		<meta charset="utf-8">
-		<meta content="width=device-width, initial-scale=1.0" name="viewport">
-		<title>{{app_name}}
-			Home</title>
-		<meta name="{{app_description}}" content="">
-		<meta
-		name="keywords" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<link rel="shortcut icon" href="{{ asset('files/site_setting/'~site_logo ) }}"> 
- 
- 		{# <link href="{{ asset('theme/homepage/assets/img/favicon.png') }}" rel="icon">
-		<link
-		href="{{ asset('theme/homepage/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon"> #}
+		<meta name="description" content="{{app_description}}">
+		<meta name="keywords" content="Timar Ethiopia, Scholarships, Opportunity for Ethiopian Students, Fellowships, IELTS, GRE, TOEFL, Internship, Ethiopian Student, PhD, MSc">
+		<meta name="author" content="Firra">
 
-		<!-- Fonts -->
-		<link href="https://fonts.googleapis.com" rel="preconnect">
-		<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+		<link href="{{ asset('theme/homePage/css.css' ) }}" rel="stylesheet">
 
-		<link href="{{ asset('theme/homepage/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('theme/homepage/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-		<link href="{{ asset('theme/homepage/assets/vendor/aos/aos.css') }}" rel="stylesheet">
-		<link href="{{ asset('theme/homepage/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('theme/homepage/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('theme/homepage/assets/css/main.css') }}" rel="stylesheet">
+		<link rel="stylesheet" href="{{ asset('theme/homePage/open-iconic-bootstrap.min.css' ) }}">
+		<link rel="stylesheet" href="{{ asset('theme/homePage/animate.css' ) }}">
 
+		<link rel="stylesheet" href="{{ asset('theme/homePage/owl.carousel.min.css' ) }}">
+		<link rel="stylesheet" href="{{ asset('theme/homePage/owl.theme.default.min.css' ) }}">
+		<link rel="stylesheet" href="{{ asset('theme/homePage/magnific-popup.css' ) }}">
+
+		<link rel="stylesheet" href="{{ asset('theme/homePage/aos.css' ) }}">
+
+		<link rel="stylesheet" href="{{ asset('theme/homePage/ionicons.min.css' ) }}">
+
+		<link rel="stylesheet" href="{{ asset('theme/homePage/bootstrap-datepicker.css' ) }}">
+		<link rel="stylesheet" href="{{ asset('theme/homePage/jquery.timepicker.css' ) }}">
+
+
+		<link rel="stylesheet" href="{{ asset('theme/homePage/flaticon.css' ) }}">
+		<link rel="stylesheet" href="{{ asset('theme/homePage/icomoon.css' ) }}">
+		<link rel="stylesheet" href="{{ asset('theme/homePage/style.css' ) }}">
+		<style>
+			type="text/css" .scrollax-performance,
+			.scrollax-performance *,
+			.scrollax-performance *:before,
+			.scrollax-performance *:after {
+				pointer-events: none !important;
+				-webkit-animation-play-state: paused !important;
+				animation-play-state: paused !important;
+			};
+		</style>
+		<script type="text/javascript" charset="UTF-8" src="{{ asset('theme/homePage/common.js' ) }}"></script>
+		<script type="text/javascript" charset="UTF-8" src="{{ asset('theme/homePage/util.js' ) }}"></script>
 	</head>
+	<body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
 
-	<body class="index-page">
-
-		<header id="header" class="header d-flex align-items-center fixed-top">
-			<div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-
-				<a href="{{path('homepage')}}" class="logo d-flex align-items-center">
-					<img src="{{ asset('files/site_setting/'~site_logo ) }}" alt="">
-					<h1 class="sitename">
-						{{app_name}}</h1>
+		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light scrolled awake" id="ftco-navbar">
+			<div class="container">
+				<a class="navbar-brand" href="{{path('homepage')}}">
+					<i class="fas fa-home"></i>Timar
+					<br><small>Ethiopia</small>
 				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="oi oi-menu"></span>
+					Menu
+				</button>
 
-				<nav id="navmenu" class="navmenu">
-					<ul>
-						<li>
-							<a href="#hero" class="active">Home</a>
+				<div class="collapse navbar-collapse" id="ftco-nav">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a href="#" class="nav-link">Home</a>
 						</li>
-						<li>
-							<a href="#about">About</a>
+						<li class="nav-item">
+							<a href="#" class="nav-link">Scholarships</a>
 						</li>
-						<li>
-							<a href="#features">Features</a>
+						<li class="nav-item">
+							<a href="#" class="nav-link">Fellowships</a>
 						</li>
-						<li>
-							<a href="#pricing">Pricing</a>
+						<li class="nav-item">
+							<a href="#" class="nav-link">Internships</a>
 						</li>
-						<li class="dropdown">
-							<a href="#">
-								<span>Dropdown</span>
-								<i class="bi bi-chevron-down toggle-dropdown"></i>
+
+						<li class="nav-item">
+							<a href="#" class="nav-link">About</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">Contact</a>
+						</li>
+						<li class="nav-item cta">
+							<a href="#" class="nav-link">
+								<span>Apply Now!</span>
 							</a>
-							<ul>
-								<li>
-									<a href="#">Dropdown 1</a>
-								</li>
-								<li class="dropdown">
-									<a href="#">
-										<span>Deep Dropdown</span>
-										<i class="bi bi-chevron-down toggle-dropdown"></i>
-									</a>
-									<ul>
-										<li><a href="#">Deep Dropdown 1</a></li>
-										<li><a href="#">Deep Dropdown 2</a></li>
-										<li><a href="#">Deep Dropdown 3</a></li>
-										<li><a href="#">Deep Dropdown 4</a></li>
-										<li><a href="#">Deep Dropdown 5</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="#">Dropdown 2</a>
-								</li>
-								<li>
-									<a href="#">Dropdown 3</a>
-								</li>
-								<li>
-									<a href="#">Dropdown 4</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="#contact">Contact</a>
 						</li>
 					</ul>
-					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-				</nav>
-
+				</div>
 			</div>
-		</header>
-
-		<main
-			class="main">
-
-			<!-- Hero Section -->
-			<section id="hero" class="hero section dark-background">
-
-				<div class="container">
-					{% include "flash_messages.html.twig" %}
-
-					{% block body %}
-					 
-					{% endblock  %}
-				</div>
-
-			</section>
-			<section id="hero" class="hero section dark-background">
-
-				<div class="container">
-					<div class="row gy-4">
-						<div class="col-lg-4 order-lg-last hero-img" data-aos="zoom-out">
-							<img src="{{ asset('theme/homepage/assets/img/phone_1.png') }}" alt="Phone 1" class="phone-1">
-							<img src="{{ asset('theme/homepage/assets/img/phone_2.png') }}" alt="Phone 2" class="phone-2">
-						</div>
-						<div class="col-lg-8 d-flex flex-column justify-content-center align-items text-center text-md-start" data-aos="">
-							<h2>Promote Your App with SoftLand</h2>
-							<p>We are team of talented designers making websites with Bootstrap</p>
-							<div class="d-flex mt-4 justify-content-center justify-content-md-start">
-								<a href="#" class="download-btn">
-									<i class="bi bi-send"></i>
-									<span>Submit a protocol</span>
-								</a>
-								<a href="#" class="download-btn">
-									<i class="bi bi-check"></i>
-									<span>Verify  Clearance</span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</section>
-			<!-- /Hero Section -->
-
-			<!-- About Section -->
-			<section id="about" class="about section">
-
-				<div class="container" data-aos=""  >
-					<div class="row align-items-xl-center gy-5">
-
-						<div class="col-xl-5 content">
-							<h3>About Us</h3>
-							<h2>Ducimus rerum libero reprehenderit cumque</h2>
-							<p>Ipsa sint sit. Quis ducimus tempore dolores impedit et dolor cumque alias maxime. Enim reiciendis minus et rerum hic non. Dicta quas cum quia maiores iure. Quidem nulla qui assumenda incidunt voluptatem tempora deleniti soluta.</p>
-							<a href="#" class="read-more">
-								<span>Read More</span>
-								<i class="bi bi-arrow-right"></i>
-							</a>
-						</div>
-
-						<div class="col-xl-7">
-							<div class="row gy-4 icon-boxes">
-
-								<div class="col-md-6" data-aos="" data-aos-delay="200">
-									<div class="icon-box">
-										<i class="bi bi-buildings"></i>
-										<h3>Eius provident</h3>
-										<p>Magni repellendus vel ullam hic officia accusantium ipsa dolor omnis dolor voluptatem</p>
-									</div>
-								</div>
-								<!-- End Icon Box -->
-
-								<div class="col-md-6" data-aos="" data-aos-delay="300">
-									<div class="icon-box">
-										<i class="bi bi-clipboard-pulse"></i>
-										<h3>Rerum aperiam</h3>
-										<p>Autem saepe animi et aut aspernatur culpa facere. Rerum saepe rerum voluptates quia</p>
-									</div>
-								</div>
-								<!-- End Icon Box -->
-
-								<div class="col-md-6" data-aos="" data-aos-delay="400">
-									<div class="icon-box">
-										<i class="bi bi-command"></i>
-										<h3>Veniam omnis</h3>
-										<p>Omnis perferendis molestias culpa sed. Recusandae quas possimus. Quod consequatur corrupti</p>
-									</div>
-								</div>
-								<!-- End Icon Box -->
-
-								<div class="col-md-6" data-aos="" data-aos-delay="500">
-									<div class="icon-box">
-										<i class="bi bi-graph-up-arrow"></i>
-										<h3>Delares sapiente</h3>
-										<p>Sint et dolor voluptas minus possimus nostrum. Reiciendis commodi eligendi omnis quideme lorenda</p>
-									</div>
-								</div>
-								<!-- End Icon Box -->
-
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-			</section>
-			<!-- /About Section -->
-
-			<!-- Featured Section -->
-			<section
-				id="featured" class="featured section">
-
-				<!-- Section Title -->
-				<div class="container section-title" data-aos="">
-					<h2>Save your time to using SoftLand</h2>
-					<p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-				</div>
-				<!-- End Section Title -->
-
-				<div class="container">
-
-					<div class="row gy-4" data-aos="" data-aos-delay="100">
-
-						<div class="col-md-4">
-							<div class="card">
-								<div class="img">
-									<img src="{{ asset('theme/homepage/assets/img/cards-4.png') }}" alt="" class="img-fluid">
-									<div class="icon">
-										<i class="bi bi-hdd-stack"></i>
-									</div>
-								</div>
-								<h2 class="title">Explore Your Team</h2>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-								</p>
-							</div>
-						</div>
-						<!-- End Card Item -->
-
-						<div class="col-md-4" data-aos="" data-aos-delay="200">
-							<div class="card">
-								<div class="img">
-									<img src="{{ asset('theme/homepage/assets/img/cards-2.png') }}" alt="" class="img-fluid">
-									<div class="icon">
-										<i class="bi bi-brightness-high"></i>
-									</div>
-								</div>
-								<h2 class="title">Digital Whiteboard</h2>
-								<p>
-									Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-								</p>
-							</div>
-						</div>
-						<!-- End Card Item -->
-
-						<div class="col-md-4" data-aos="" data-aos-delay="300">
-							<div class="card">
-								<div class="img">
-									<img src="{{ asset('theme/homepage/assets/img/cards-6.png') }}" alt="" class="img-fluid">
-									<div class="icon">
-										<i class="bi bi-calendar4-week"></i>
-									</div>
-								</div>
-								<h2 class="title">Design To Development</h2>
-								<p>
-									Nemo enim ipsam voluptatem quia voluptas sit aut odit aut fugit, sed quia magni dolores eos qui ratione voluptatem sequi nesciunt Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
-								</p>
-							</div>
-						</div>
-						<!-- End Card Item -->
-
-					</div>
-
-				</div>
-
-			</section>
-			<!-- /Featured Section -->
-
-			<!-- Cards Section -->
-			<section id="cards" class="cards section">
-
-				<div class="container">
-
-					<div class="text-center mb-4 steps-img" data-aos="zoom-out">
-						<img src="{{ asset('theme/homepage/assets/img/steps.svg') }}" alt="">
-					</div>
-
-					<div class="row gy-4">
-
-						<div class="col-lg-4" data-aos="" data-aos-delay="100">
-							<div class="card-item">
-								<span>01</span>
-								<h4>Sign Up</h4>
-								<p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
-							</div>
-						</div>
-						<!-- Card Item -->
-
-						<div class="col-lg-4" data-aos="" data-aos-delay="200">
-							<div class="card-item">
-								<span>02</span>
-								<h4>
-									<a href="" class="stretched-link">Repellat Nihil</a>
-								</h4>
-								<p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest</p>
-							</div>
-						</div>
-						<!-- Card Item -->
-
-						<div class="col-lg-4" data-aos="" data-aos-delay="300">
-							<div class="card-item">
-								<span>03</span>
-								<h4>
-									<a href="" class="stretched-link">Ad ad velit qui</a>
-								</h4>
-								<p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
-							</div>
-						</div>
-						<!-- Card Item -->
-
-					</div>
-
-				</div>
-
-			</section>
-			<!-- /Cards Section -->
-
-			<!-- Features Section -->
-			<section
-				id="features" class="features section">
-
-				<!-- Section Title -->
-				<div class="container section-title" data-aos="">
-					<h2>Features</h2>
-					<p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-				</div>
-				<!-- End Section Title -->
-
-				<div class="container">
-
-					<div class="row gy-4 align-items-center features-item">
-						<div class="col-md-5 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
-							<img src="{{ asset('theme/homepage/assets/img/features-1.svg') }}" class="img-fluid" alt="">
-						</div>
-						<div class="col-md-7" data-aos="" data-aos-delay="100">
-							<h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-							<p class="fst-italic">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-																																								              magna aliqua.
-							</p>
-							<ul>
-								<li>
-									<i class="bi bi-check"></i>
-									<span>
-										Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-								</li>
-								<li>
-									<i class="bi bi-check"></i>
-									<span>Duis aute irure dolor in reprehenderit in voluptate velit.</span>
-								</li>
-								<li>
-									<i class="bi bi-check"></i>
-									<span>Ullam est qui quos consequatur eos accusamus.</span>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<!-- Features Item -->
-
-					<div class="row gy-4 align-items-center features-item">
-						<div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-							<img src="{{ asset('theme/homepage/assets/img/features-2.svg') }}" class="img-fluid" alt="">
-						</div>
-						<div class="col-md-7 order-2 order-md-1" data-aos="" data-aos-delay="200">
-							<h3>Corporis temporibus maiores provident</h3>
-							<p class="fst-italic">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-																																								              magna aliqua.
-							</p>
-							<p>
-								Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-																																								              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-																																								              culpa qui officia deserunt mollit anim id est laborum
-							</p>
-						</div>
-					</div>
-					<!-- Features Item -->
-
-					<div class="row gy-4 align-items-center features-item">
-						<div class="col-md-5 d-flex align-items-center" data-aos="zoom-out">
-							<img src="{{ asset('theme/homepage/assets/img/features-3.svg') }}" class="img-fluid" alt="">
-						</div>
-						<div class="col-md-7" data-aos="">
-							<h3>Sunt consequatur ad ut est nulla consectetur reiciendis animi voluptas</h3>
-							<p>Cupiditate placeat cupiditate placeat est ipsam culpa. Delectus quia minima quod. Sunt saepe odit aut quia voluptatem hic voluptas dolor doloremque.</p>
-							<ul>
-								<li>
-									<i class="bi bi-check"></i>
-									<span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-								</li>
-								<li>
-									<i class="bi bi-check"></i>
-									<span>
-										Duis aute irure dolor in reprehenderit in voluptate velit.</span>
-								</li>
-								<li>
-									<i class="bi bi-check"></i>
-									<span>Facilis ut et voluptatem aperiam. Autem soluta ad fugiat</span>.</li>
-							</ul>
-						</div>
-					</div>
-					<!-- Features Item -->
-
-					<div class="row gy-4 align-items-center features-item">
-						<div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out">
-							<img src="{{ asset('theme/homepage/assets/img/features-4.svg') }}" class="img-fluid" alt="">
-						</div>
-						<div class="col-md-7 order-2 order-md-1" data-aos="">
-							<h3>Quas et necessitatibus eaque impedit ipsum animi consequatur incidunt in</h3>
-							<p class="fst-italic">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-																																								              magna aliqua.
-							</p>
-							<p>
-								Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-																																								              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-																																								              culpa qui officia deserunt mollit anim id est laborum
-							</p>
-						</div>
-					</div>
-					<!-- Features Item -->
-
-				</div>
-
-			</section>
-			<!-- /Features Section -->
-
-			<!-- Gallery Section -->
-			<section
-				id="gallery" class="gallery section">
-
-				<!-- Section Title -->
-				<div class="container section-title" data-aos="">
-					<h2>Gallery</h2>
-					<p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-				</div>
-				<!-- End Section Title -->
-
-				<div class="container-fluid" data-aos="" data-aos-delay="100">
-
-					<div class="swiper init-swiper">
-						<script type="application/json" class="swiper-config">
-							{
-																																			              "loop": true,
-																																			              "speed": 600,
-																																			              "autoplay": {
-																																			                "delay": 5000
-																																			              },
-																																			              "slidesPerView": "auto",
-																																			              "centeredSlides": true,
-																																			              "pagination": {
-																																			                "el": ".swiper-pagination",
-																																			                "type": "bullets",
-																																			                "clickable": true
-																																			              },
-																																			              "breakpoints": {
-																																			                "320": {
-																																			                  "slidesPerView": 1,
-																																			                  "spaceBetween": 0
-																																			                },
-																																			                "768": {
-																																			                  "slidesPerView": 3,
-																																			                  "spaceBetween": 30
-																																			                },
-																																			                "992": {
-																																			                  "slidesPerView": 5,
-																																			                  "spaceBetween": 30
-																																			                },
-																																			                "1200": {
-																																			                  "slidesPerView": 7,
-																																			                  "spaceBetween": 30
-																																			                }
-																																			              }
-																																			            }
-						</script>
-						<div class="swiper-wrapper align-items-center">
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-1.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-1.png') }}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-2.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-2.png') }}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-3.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-3.png') }}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-4.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-4.png') }}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-5.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-5.png') }}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-6.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-6.png') }}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-7.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-7.png') }}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-8.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-8.png') }}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-9.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-9.png') }}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-10.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-10.png') }}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-11.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-11.png') }}" class="img-fluid" alt=""></a>
-							</div>
-							<div class="swiper-slide">
-								<a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-12.png') }}"><img src="{{ asset('theme/homepage/assets/img/app-gallery/app-gallery-12.png') }}" class="img-fluid" alt=""></a>
-							</div>
-						</div>
-						<div class="swiper-pagination"></div>
-					</div>
-
-				</div>
-
-			</section>
-			<!-- /Gallery Section -->
-
-			<!-- Testimonials Section -->
-			<section
-				id="testimonials" class="testimonials section light-background">
-
-				<!-- Section Title -->
-				<div class="container section-title" data-aos="">
-					<h2>Testimonials</h2>
-					<p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-				</div>
-				<!-- End Section Title -->
-
-				<div class="container" data-aos="" data-aos-delay="100">
-
-					<div class="swiper init-swiper">
-						<script type="application/json" class="swiper-config">
-							{
-																																			              "loop": true,
-																																			              "speed": 600,
-																																			              "autoplay": {
-																																			                "delay": 5000
-																																			              },
-																																			              "slidesPerView": "auto",
-																																			              "pagination": {
-																																			                "el": ".swiper-pagination",
-																																			                "type": "bullets",
-																																			                "clickable": true
-																																			              }
-																																			            }
-						</script>
-						<div class="swiper-wrapper">
-
-							<div class="swiper-slide">
-								<div class="testimonial-item">
-									<img src="{{ asset('theme/homepage/assets/img/testimonials/testimonials-1.jpg') }}" class="testimonial-img" alt="">
-									<h3>Saul Goodman</h3>
-									<h4>Ceo &amp; Founder</h4>
-									<div class="stars">
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-									</div>
-									<p>
-										<i class="bi bi-quote quote-icon-left"></i>
-										<span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-										<i class="bi bi-quote quote-icon-right"></i>
-									</p>
-								</div>
-							</div>
-							<!-- End testimonial item -->
-
-							<div class="swiper-slide">
-								<div class="testimonial-item">
-									<img src="{{ asset('theme/homepage/assets/img/testimonials/testimonials-2.jpg') }}" class="testimonial-img" alt="">
-									<h3>Sara Wilsson</h3>
-									<h4>Designer</h4>
-									<div class="stars">
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-									</div>
-									<p>
-										<i class="bi bi-quote quote-icon-left"></i>
-										<span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-										<i class="bi bi-quote quote-icon-right"></i>
-									</p>
-								</div>
-							</div>
-							<!-- End testimonial item -->
-
-							<div class="swiper-slide">
-								<div class="testimonial-item">
-									<img src="{{ asset('theme/homepage/assets/img/testimonials/testimonials-3.jpg') }}" class="testimonial-img" alt="">
-									<h3>Jena Karlis</h3>
-									<h4>Store Owner</h4>
-									<div class="stars">
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-									</div>
-									<p>
-										<i class="bi bi-quote quote-icon-left"></i>
-										<span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-										<i class="bi bi-quote quote-icon-right"></i>
-									</p>
-								</div>
-							</div>
-							<!-- End testimonial item -->
-
-							<div class="swiper-slide">
-								<div class="testimonial-item">
-									<img src="{{ asset('theme/homepage/assets/img/testimonials/testimonials-4.jpg') }}" class="testimonial-img" alt="">
-									<h3>Matt Brandon</h3>
-									<h4>Freelancer</h4>
-									<div class="stars">
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-									</div>
-									<p>
-										<i class="bi bi-quote quote-icon-left"></i>
-										<span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-										<i class="bi bi-quote quote-icon-right"></i>
-									</p>
-								</div>
-							</div>
-							<!-- End testimonial item -->
-
-							<div class="swiper-slide">
-								<div class="testimonial-item">
-									<img src="{{ asset('theme/homepage/assets/img/testimonials/testimonials-5.jpg') }}" class="testimonial-img" alt="">
-									<h3>John Larson</h3>
-									<h4>Entrepreneur</h4>
-									<div class="stars">
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-										<i class="bi bi-star-fill"></i>
-									</div>
-									<p>
-										<i class="bi bi-quote quote-icon-left"></i>
-										<span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-										<i class="bi bi-quote quote-icon-right"></i>
-									</p>
-								</div>
-							</div>
-							<!-- End testimonial item -->
-
-						</div>
-						<div class="swiper-pagination"></div>
-					</div>
-
-				</div>
-
-			</section>
-			<!-- /Testimonials Section -->
-
-			<!-- Pricing Section -->
-			<section
-				id="pricing" class="pricing section">
-
-				<!-- Section Title -->
-				<div class="container section-title" data-aos="">
-					<h2>Pricing</h2>
-					<p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-				</div>
-				<!-- End Section Title -->
-
-				<div class="container" data-aos="zoom-in" data-aos-delay="100">
-
-					<div class="row g-4">
-
-						<div class="col-lg-4">
-							<div class="pricing-item">
-								<h3>Free Plan</h3>
-								<div class="icon">
-									<i class="bi bi-box"></i>
-								</div>
-								<h4>
-									<sup>$</sup>0<span>
-										/ month</span>
-								</h4>
-								<ul>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Quam adipiscing vitae proin</span>
-									</li>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Nec feugiat nisl pretium</span>
-									</li>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Nulla at volutpat diam uteera</span>
-									</li>
-									<li class="na">
-										<i class="bi bi-x"></i>
-										<span>Pharetra massa massa ultricies</span>
-									</li>
-									<li class="na">
-										<i class="bi bi-x"></i>
-										<span>Massa ultricies mi quis hendrerit</span>
-									</li>
-								</ul>
-								<div class="text-center">
-									<a href="#" class="buy-btn">Buy Now</a>
-								</div>
-							</div>
-						</div>
-						<!-- End Pricing Item -->
-
-						<div class="col-lg-4">
-							<div class="pricing-item featured">
-								<h3>Business Plan</h3>
-								<div class="icon">
-									<i class="bi bi-rocket"></i>
-								</div>
-
-								<h4>
-									<sup>$</sup>29<span>
-										/ month</span>
-								</h4>
-								<ul>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Quam adipiscing vitae proin</span>
-									</li>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Nec feugiat nisl pretium</span>
-									</li>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Nulla at volutpat diam uteera</span>
-									</li>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Pharetra massa massa ultricies</span>
-									</li>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Massa ultricies mi quis hendrerit</span>
-									</li>
-								</ul>
-								<div class="text-center">
-									<a href="#" class="buy-btn">Buy Now</a>
-								</div>
-							</div>
-						</div>
-						<!-- End Pricing Item -->
-
-						<div class="col-lg-4">
-							<div class="pricing-item">
-								<h3>Developer Plan</h3>
-								<div class="icon">
-									<i class="bi bi-send"></i>
-								</div>
-								<h4>
-									<sup>$</sup>49<span>
-										/ month</span>
-								</h4>
-								<ul>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Quam adipiscing vitae proin</span>
-									</li>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Nec feugiat nisl pretium</span>
-									</li>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Nulla at volutpat diam uteera</span>
-									</li>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Pharetra massa massa ultricies</span>
-									</li>
-									<li>
-										<i class="bi bi-check"></i>
-										<span>Massa ultricies mi quis hendrerit</span>
-									</li>
-								</ul>
-								<div class="text-center">
-									<a href="#" class="buy-btn">Buy Now</a>
-								</div>
-							</div>
-						</div>
-						<!-- End Pricing Item -->
-
-					</div>
-
-				</div>
-
-			</section>
-			<!-- /Pricing Section -->
-
-			<!-- Faq Section -->
-			<section 				id="faq" class="faq section">
-
-				<!-- Section Title -->
-				<div class="container section-title" data-aos="">
-					<h2>Frequently Asked Questions</h2>
-					<p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-				</div>
-				<!-- End Section Title -->
-
-				<div class="container">
-
-					<div class="row justify-content-center">
-
-						<div class="col-lg-10" data-aos="" data-aos-delay="100">
-
-							<div class="faq-container">
-
-								<div class="faq-item faq-active">
-									<h3>Non consectetur a erat nam at lectus urna duis?</h3>
-									<div class="faq-content">
-										<p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
-									</div>
-									<i class="faq-toggle bi bi-chevron-right"></i>
-								</div>
-								<!-- End Faq item-->
-
-								  
-								<!-- End Faq item-->
-
-								<div class="faq-item">
-									<h3>Perspiciatis quod quo quos nulla quo illum ullam?</h3>
-									<div class="faq-content">
-										<p>Enim ea facilis quaerat voluptas quidem et dolorem. Quis et consequatur non sed in suscipit sequi. Distinctio ipsam dolore et.</p>
-									</div>
-									<i class="faq-toggle bi bi-chevron-right"></i>
-								</div>
-								<!-- End Faq item-->
-
-							</div>
-
-						</div>
-						<!-- End Faq Column-->
-
-					</div>
-
-				</div>
-
-			</section>
-
-
-			<!-- /Faq Section -->
-
-			<!-- Contact Section -->
-			<section
-				id="contact" class="contact section">
-
-				<!-- Section Title -->
-				<div class="container section-title" data-aos="">
-					<h2>Contact</h2>
-					<p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-				</div>
-				<!-- End Section Title -->
-
-				<div class="container" data-aos="fade" data-aos-delay="100">
-
-					<div class="row gy-4">
-
-						<div class="col-lg-4">
-							<div class="info-item d-flex" data-aos="" data-aos-delay="200">
-								<i class="bi bi-geo-alt flex-shrink-0"></i>
-								<div>
-									<h3>Address</h3>
-									<p>A108 Adam Street, New York, NY 535022</p>
-								</div>
-							</div>
-							<!-- End Info Item -->
-
-							<div class="info-item d-flex" data-aos="" data-aos-delay="300">
-								<i class="bi bi-telephone flex-shrink-0"></i>
-								<div>
-									<h3>Call Us</h3>
-									<p>+1 5589 55488 55</p>
-								</div>
-							</div>
-							<!-- End Info Item -->
-
-							<div class="info-item d-flex" data-aos="" data-aos-delay="400">
-								<i class="bi bi-envelope flex-shrink-0"></i>
-								<div>
-									<h3>Email Us</h3>
-									<p>info@example.com</p>
-								</div>
-							</div>
-							<!-- End Info Item -->
-
-						</div>
-
-						<div class="col-lg-8">
-							<form action="forms/contact.php" method="post" class="php-email-form" data-aos="" data-aos-delay="200">
-								<div class="row gy-4">
-
-									<div class="col-md-6">
-										<input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-									</div>
-
-									<div class="col-md-6 ">
-										<input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-									</div>
-
-									<div class="col-md-12">
-										<input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-									</div>
-
-									<div class="col-md-12">
-										<textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-									</div>
-
-									<div class="col-md-12 text-center">
-										<div class="loading">Loading</div>
-										<div class="error-message"></div>
-										<div class="sent-message">Your message has been sent. Thank you!</div>
-
-										<button type="submit">Send Message</button>
-									</div>
-
-								</div>
-							</form>
-						</div>
-						<!-- End Contact Form -->
-
-					</div>
-
-				</div>
-
-			</section>
-			<!-- /Contact Section -->
-
-		</main>
-
-		<footer id="footer" class="footer dark-background">
+		</nav>
+		<!-- END nav -->
+
+		<div class="hero-wrap hero-wrap-2" style="background-image: url('{{ asset('theme/homePage/bg_2.jpg')}}' ); background-attachment:fixed;">
+			<div class="overlay"></div>
 			<div class="container">
-				<h3 class="sitename">SoftLand</h3>
-				<p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
-				<div class="social-links d-flex justify-content-center">
-					<a href="">
-						<i class="bi bi-twitter-x"></i>
-					</a>
-					<a href="">
-						<i class="bi bi-facebook"></i>
-					</a>
-					<a href="">
-						<i class="bi bi-instagram"></i>
-					</a>
-					<a href="">
-						<i class="bi bi-skype"></i>
-					</a>
-					<a href="">
-						<i class="bi bi-linkedin"></i>
-					</a>
-				</div>
-				<div class="container">
-					<div class="copyright">
-						<span>Copyright</span>
-						<strong class="px-1 sitename">SoftLand</strong>
-						<span>All Rights Reserved</span>
-					</div>
-					<div class="credits">
-						<!-- All the links in the footer should remain intact. -->
-						<!-- You can delete the links only if you've purchased the pro version. -->
-						<!-- Licensing information: https://bootstrapmade.com/license/ -->
-						<!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-						Designed by
-							<a href="https://bootstrapmade.com/"> BootstrapMade</a>
+				<div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+					<div class="col-md-8 ftco-animate text-center fadeInUp ftco-animated">
+						<p class="breadcrumbs">
+							<span class="mr-2">
+								<a href="#">Home</a>
+							</span>
+							<span>
+								{% block opportunity %}{% endblock  %}
+							</span>
+						</p>
+						<h1 class="mb-3 bread"> {% block opportunitiesTypeName %}{% endblock  %}
+							</h1>
+						</div>
 					</div>
 				</div>
 			</div>
-		</footer>
 
-		<!-- Scroll Top -->
-		<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
-			<i class="bi bi-arrow-up-short"></i>
-		</a>
+			<section class="ftco-section">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 ftco-animate fadeInUp ftco-animated   "> {% block body %}
+						
+						
+						{% for opportunity in opportunities %}
+										
+										<div class="block-21 mb-4 d-flex">
+										<a class="blog-img mr-4" style="background-image: url({{ asset('theme/homePage/bg_1.jpg')}});"></a>
+										<div class="text">
+											<h3 class="heading">
+												<a href="#">{{ opportunity.title }}</a>
+											</h3>
+											<div class="meta">
+												<div>
+													<a href="#">
+														<span class="icon-calendar"></span>
+														{{ opportunity.postedDate ? opportunity.postedDate|date('Y-m-d') : 'N/A' }}</a>
+												</div>
+												<div>
+													<a href="#">
+														<span class="icon-person"></span>
+														Admin</a>
+												</div>
+												<div>
+													<a href="#">
+														<span class="icon-chat"></span>
+														19</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									 
+									{% else %}
+										 No recent opportunities available. 
+									
+{% endfor %} 
+						{% endblock body %}
+							</div>
 
-		<!-- Preloader -->
-		<div id="preloader"></div>
+							<div class="col-md-4 sidebar ftco-animate fadeInUp ftco-animated">
+								<div class="sidebar-box ftco-animate fadeInUp ftco-animated">
+									<div class="categories">
+										<h3>Categories</h3>
+										<li>
+											<a href="#">Departments
+												<span>(12)</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">Doctors
+												<span>(22)</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">Medicine
+												<span>(37)</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">Hospital
+												<span>(42)</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">Cure
+												<span>(14)</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">Health
+												<span>(140)</span>
+											</a>
+										</li>
+									</div>
+								</div>
 
-		<!-- Vendor JS Files -->
-		<script src="{{ asset('theme/homepage/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-		<script src="{{ asset('theme/homepage/assets/vendor/php-email-form/validate.js') }}"></script>
-		<script src="{{ asset('theme/homepage/assets/vendor/aos/aos.js') }}"></script>
-		<script src="{{ asset('theme/homepage/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
-		<script src="{{ asset('theme/homepage/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
 
-		<!-- Main JS File -->
-		<script src="{{ asset('theme/homepage/assets/js/main.js') }}"></script>
+								<div class="sidebar-box ftco-animate fadeInUp ftco-animated">
+									<h3>Recent Blog</h3>
+									
 
-	</body>
 
-</html>
+									{# {% set opportunities = getRecentOpportunities(5) %} #}
+									{# {% for opportunity in opportunities %}
+										
+										<div class="block-21 mb-4 d-flex">
+										<a class="blog-img mr-4" style="background-image: url({{ asset('theme/homePage/bg_1.jpg')}});"></a>
+										<div class="text">
+											<h3 class="heading">
+												<a href="#">{{ opportunity.title }}</a>
+											</h3>
+											<div class="meta">
+												<div>
+													<a href="#">
+														<span class="icon-calendar"></span>
+														{{ opportunity.postedDate ? opportunity.postedDate|date('Y-m-d') : 'N/A' }}</a>
+												</div>
+												<div>
+													<a href="#">
+														<span class="icon-person"></span>
+														Admin</a>
+												</div>
+												<div>
+													<a href="#">
+														<span class="icon-chat"></span>
+														19</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									 
+									{% else %}
+										 No recent opportunities available. 
+									
+{% endfor %}  #}
+<p>{{ my_global_variable }}</p>
+								</div>
+
+								{% block rightSide %}{% endblock rightSide %}
+
+							</div>
+						</div>
+
+
+					</div>
+				</body>
+			</body>
+		</html>
+	</section>
+
+	<section class="ftco-section-parallax">
+		<div class="parallax-img d-flex align-items-center">
+			<div class="container">
+				<div class="row d-flex justify-content-center">
+					<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+						<h2>Subcribe to our Newsletter</h2>
+						<p>Take the next step in your career, education, or personal development. Get conntected to our postings to get updated</p>
+						<div class="row d-flex justify-content-center mt-5">
+							<div class="col-md-8">
+								<form action="#" class="subscribe-form">
+									<div class="form-group d-flex">
+										<input type="text" class="form-control" placeholder="Enter email address">
+										<input type="submit" value="Subscribe" class="submit px-3">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="ftco-footer ftco-bg-dark ftco-section img" style="background-image: url({{ asset('theme/homePage/bg_1.jpg')}}); background-attachment:fixed;">
+		<div class="overlay"></div>
+		<div
+			class="container">
+			{# <div class="row mb-5">
+																												<div class="col-md-3">
+																													<div class="ftco-footer-widget mb-4">
+																														<h2>
+																															<a class="navbar-brand" href="https://preview.colorlib.com/theme/genius/index.html">
+																																<i class="flaticon-university"></i>Timar
+																																<br><small>Ethiopia</small>
+																															</a>
+																														</h2>
+																														<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the  </p>
+																														<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+																															<li class="ftco-animate">
+																																<a href="#">
+																																	<span class="icon-twitter"></span>
+																																</a>
+																															</li>
+																															<li class="ftco-animate">
+																																<a href="#">
+																																	<span class="icon-facebook"></span>
+																																</a>
+																															</li>
+																															<li class="ftco-animate">
+																																<a href="#">
+																																	<span class="icon-instagram"></span>
+																																</a>
+																															</li>
+																														</ul>
+																													</div>
+																												</div>
+																												<div class="col-md-4">
+																													<div class="ftco-footer-widget mb-4">
+																														<h2 class="ftco-heading-2">Recent Blog</h2>
+																														<div class="block-21 mb-4 d-flex">
+																															<a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+																															<div class="text">
+																																<h3 class="heading">
+																																	<a href="#">Even the all-powerful Pointing has no control about</a>
+																																</h3>
+																																<div class="meta">
+																																	<div>
+																																		<a href="#">
+																																			<span class="icon-calendar"></span>
+																																			July 12, 2018</a>
+																																	</div>
+																																	<div>
+																																		<a href="#">
+																																			<span class="icon-person"></span>
+																																			Admin</a>
+																																	</div>
+																																	<div>
+																																		<a href="#">
+																																			<span class="icon-chat"></span>
+																																			19</a>
+																																	</div>
+																																</div>
+																															</div>
+																														</div>
+																														<div class="block-21 mb-4 d-flex">
+																															<a class="blog-img mr-4" style="background-image: url({{ asset('theme/homePage/bg_1.jpg')}});"></a>
+																															<div class="text">
+																																<h3 class="heading">
+																																	<a href="#">Even the all-powerful Pointing has no control about</a>
+																																</h3>
+																																<div class="meta">
+																																	<div>
+																																		<a href="#">
+																																			<span class="icon-calendar"></span>
+																																			July 12, 2018</a>
+																																	</div>
+																																	<div>
+																																		<a href="#">
+																																			<span class="icon-person"></span>
+																																			Admin</a>
+																																	</div>
+																																	<div>
+																																		<a href="#">
+																																			<span class="icon-chat"></span>
+																																			19</a>
+																																	</div>
+																																</div>
+																															</div>
+																														</div>
+																													</div>
+																												</div>
+																												<div class="col-md-2">
+																													<div class="ftco-footer-widget mb-4 ml-md-4">
+																														<h2 class="ftco-heading-2">Site Links</h2>
+																														<ul class="list-unstyled">
+																															<li>
+																																<a href="#" class="py-2 d-block">Home</a>
+																															</li>
+																															<li>
+																																<a href="#" class="py-2 d-block">About</a>
+																															</li>
+																															<li>
+																																<a href="#" class="py-2 d-block">Courses</a>
+																															</li>
+																															<li>
+																																<a href="#" class="py-2 d-block">Students</a>
+																															</li>
+																															<li>
+																																<a href="#" class="py-2 d-block">Video</a>
+																															</li>
+																														</ul>
+																													</div>
+																												</div>
+																												<div class="col-md-3">
+																													<div class="ftco-footer-widget mb-4">
+																														<h2 class="ftco-heading-2">Have a Questions?</h2>
+																														<div class="block-23 mb-3">
+																															<ul>
+																																<li>
+																																	<span class="icon icon-map-marker"></span>
+																																	<span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span>
+																																</li>
+																																<li>
+																																	<a href="#">
+																																		<span class="icon icon-phone"></span>
+																																		<span class="text">+2 392 3929 210</span>
+																																	</a>
+																																</li>
+																																<li>
+																																	<a href="#">
+																																		<span class="icon icon-envelope"></span>
+																																		<span class="text">info@yourdomain.com</span>
+																																	</a>
+																																</li>
+																															</ul>
+																														</div>
+																													</div>
+																												</div>
+																											</div> #}
+			<div class="row">
+				<div class="col-md-12 text-center">
+
+					<p>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright ©<script type="text/javascript" async="" src="{{ asset('theme/homePage/analytics.js' ) }}"></script>
+						<script>
+							document.write(new Date().getFullYear());
+						</script>2024 All rights reserved
+						<i class="icon-heart" aria-hidden="true"></i>
+						|
+						<a href="#" target="_blank">Timar</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- loader -->
+	<div id="ftco-loader" class="fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"></circle>
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"></circle>
+		</svg>
+	</div>
+
+
+	<script src="{{ asset('theme/homePage/jquery.min.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/jquery-migrate-3.0.1.min.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/popper.min.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/bootstrap.min.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/jquery.easing.1.3.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/jquery.waypoints.min.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/jquery.stellar.min.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/owl.carousel.min.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/jquery.magnific-popup.min.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/aos.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/jquery.animateNumber.min.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/bootstrap-datepicker.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/jquery.timepicker.min.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/scrollax.min.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/js.es' ) }}"></script>
+	<script src="{{ asset('theme/homePage/google-map.js' ) }}"></script>
+	<script src="{{ asset('theme/homePage/main.js' ) }}"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="{{ asset('theme/homePage/js')}}"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+function gtag() {
+dataLayer.push(arguments);
+}
+gtag('js', new Date());
+
+gtag('config', 'UA-23581568-13');
+	</script>
+
+	<script defer="defer" src="{{ asset('theme/homePage/vcd15cbe7772f49c399c6a5babf22c1241717689176015.es' ) }}" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;8ef53a0d4bbf54d6&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}},&quot;version&quot;:&quot;2024.10.5&quot;,&quot;token&quot;:&quot;cd0b4b3a733644fc843ef0b185f98241&quot;}" crossorigin="anonymous"></script>
+
+</body></html>

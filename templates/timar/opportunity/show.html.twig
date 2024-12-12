@@ -1,0 +1,46 @@
+{% extends 'homelayout.html.twig' %}
+
+{% block title %}{{ opportunity.title }}{% endblock %}
+
+{% block body %}
+
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ opportunity.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ opportunity.title }}</td>
+            </tr>
+            <tr>
+                <th>Uid</th>
+                <td>{{ opportunity.uid }}</td>
+            </tr>
+            <tr>
+                <th>PostedDate</th>
+                <td>{{ opportunity.postedDate ? opportunity.postedDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ opportunity.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ opportunity.image }}</td>
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td>{{ opportunity.link }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_timar_opportunity_index') }}">back to list</a>
+
+    <a href="{{ path('app_timar_opportunity_edit', {'id': opportunity.id}) }}">edit</a>
+ 
+{% endblock %}

@@ -1,0 +1,85 @@
+{# templates/opportunity/index.html.twig #}
+
+{% extends 'homelayout.html.twig' %}
+
+{% block body %}
+	<div id="opportunity-list">
+		<div class="row d-flex">
+
+			{% for opportunity in opportunities %}
+
+				<div class="col-md-4 d-flex  opportunity ftco-animate fadeInUp ftco-animated">
+					<div class="blog-entry align-self-stretch">
+						<a href="https://preview.colorlib.com/theme/genius/blog-single.html" class="block-20" style="background-image: url('{{ asset('theme/homePage/bg_1.jpg')}}');"></a>
+						<div class="text p-4 d-block">
+							<div class="meta mb-3">
+								<div>
+									<a href="#">{{ opportunity.postedDate|date('m d, Y i:s') }}</a>
+								</div>
+								<div>       
+									<a href="#">Admin</a>
+								</div>
+								<div>
+									<a href="{{ opportunity.id}}" class="meta-chat">
+										<span class="icon-chat"></span>
+										3</a>
+								</div>
+							</div>
+							<h3 class="heading mt-3">
+								<a href="#">{{ opportunity.title }}</a>
+							</h3>
+							<p>{{ opportunity.description }}</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div id="loading" style="display: none;">Loading...</div>
+	<div id="sentinel"></div>
+
+	<script>
+		let offset = {{ opportunities|length }};
+const loadMoreUrl = "{{ path('opportunity_load') }}";
+
+const loadMoreOpportunities = () => {
+const loadingIndicator = document.getElementById('loading');
+loadingIndicator.style.display = 'block';
+
+fetch(`${loadMoreUrl}?offset=${offset}`).then(response => {
+if (!response.ok) {
+throw new Error('Network response was not ok');
+}
+return response.json();
+}).then(data => {
+loadingIndicator.style.display = 'none';
+if (data.length > 0) {
+data.forEach(opportunity => {
+const div = document.createElement('div');
+div.classList.add('opportunity');
+div.innerHTML = `<h3>${
+opportunity.title
+}</h3><p>${
+opportunity.description
+}</p><p><a href="${
+opportunity.link
+}">View More</a></p>`;
+document.getElementById('opportunity-list').appendChild(div);
+});
+offset += data.length;
+}
+}).catch(error => {
+loadingIndicator.style.display = 'none';
+console.error('Error loading more opportunities:', error);
+});
+};
+
+const observer = new IntersectionObserver(entries => {
+if (entries[0].isIntersecting) {
+loadMoreOpportunities();
+}
+});
+
+observer.observe(document.getElementById('sentinel'));
+	</script>
+{% endblock %}

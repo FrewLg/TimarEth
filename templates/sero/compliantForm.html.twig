@@ -1,4 +1,4 @@
-{% extends 'widebase.html.twig' %}
+{% extends 'homelayout.html.twig' %}
 
 {% block title %}New Version
 {% endblock %}
@@ -8,11 +8,8 @@
 	<div class="card">
 		<div class="card-header">
  				<h4>Submit a compliant</h4>
-
  		</div>
 		<div class="card-body">
-
-
 			{{ form_start(form) }}
 			{{ form_widget(form) }}
 			<button class="btn btn-sm btn-light-success">{{ button_label|default('Send compliant') }}</button>
